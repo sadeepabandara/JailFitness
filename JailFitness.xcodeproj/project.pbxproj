@@ -13,6 +13,14 @@
 		42940CDA29C8AB29006384E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42940CD829C8AB29006384E6 /* Main.storyboard */; };
 		42940CDC29C8AB2A006384E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42940CDB29C8AB2A006384E6 /* Assets.xcassets */; };
 		42940CDF29C8AB2A006384E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42940CDD29C8AB2A006384E6 /* LaunchScreen.storyboard */; };
+		42940CE729CBF51C006384E6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CE629CBF51C006384E6 /* SecondViewController.swift */; };
+		42940CEE29CF4DE0006384E6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CED29CF4DE0006384E6 /* RegisterViewController.swift */; };
+		42940CF229CF558F006384E6 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CF129CF558F006384E6 /* Poppins-Regular.ttf */; };
+		42940CF429CF55B0006384E6 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CF329CF55B0006384E6 /* Poppins-SemiBold.ttf */; };
+		42940CF629CF55C1006384E6 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CF529CF55C1006384E6 /* Poppins-Bold.ttf */; };
+		42940CF829CF59F3006384E6 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CF729CF59F3006384E6 /* Poppins-Light.ttf */; };
+		42940CFA29D0348A006384E6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CF929D0348A006384E6 /* LoginViewController.swift */; };
+		42940CFC29D03B7B006384E6 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CFB29D03B7B006384E6 /* Poppins-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +32,14 @@
 		42940CDB29C8AB2A006384E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42940CDE29C8AB2A006384E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42940CE029C8AB2A006384E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42940CE629CBF51C006384E6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		42940CED29CF4DE0006384E6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		42940CF129CF558F006384E6 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		42940CF329CF55B0006384E6 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		42940CF529CF55C1006384E6 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		42940CF729CF59F3006384E6 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		42940CF929D0348A006384E6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		42940CFB29D03B7B006384E6 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +72,47 @@
 		42940CD129C8AB29006384E6 /* JailFitness */ = {
 			isa = PBXGroup;
 			children = (
-				42940CD229C8AB29006384E6 /* AppDelegate.swift */,
-				42940CD429C8AB29006384E6 /* SceneDelegate.swift */,
-				42940CD629C8AB29006384E6 /* ViewController.swift */,
-				42940CD829C8AB29006384E6 /* Main.storyboard */,
-				42940CDB29C8AB2A006384E6 /* Assets.xcassets */,
-				42940CDD29C8AB2A006384E6 /* LaunchScreen.storyboard */,
+				42940CEF29CF54FF006384E6 /* Fonts */,
+				42940CFD29D34E8A006384E6 /* Views */,
+				42940CFE29D34EB8006384E6 /* Supporting */,
 				42940CE029C8AB2A006384E6 /* Info.plist */,
 			);
 			path = JailFitness;
+			sourceTree = "<group>";
+		};
+		42940CEF29CF54FF006384E6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				42940CFB29D03B7B006384E6 /* Poppins-Medium.ttf */,
+				42940CF729CF59F3006384E6 /* Poppins-Light.ttf */,
+				42940CF529CF55C1006384E6 /* Poppins-Bold.ttf */,
+				42940CF329CF55B0006384E6 /* Poppins-SemiBold.ttf */,
+				42940CF129CF558F006384E6 /* Poppins-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		42940CFD29D34E8A006384E6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				42940CD629C8AB29006384E6 /* ViewController.swift */,
+				42940CE629CBF51C006384E6 /* SecondViewController.swift */,
+				42940CED29CF4DE0006384E6 /* RegisterViewController.swift */,
+				42940CF929D0348A006384E6 /* LoginViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		42940CFE29D34EB8006384E6 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				42940CD229C8AB29006384E6 /* AppDelegate.swift */,
+				42940CD429C8AB29006384E6 /* SceneDelegate.swift */,
+				42940CDB29C8AB2A006384E6 /* Assets.xcassets */,
+				42940CD829C8AB29006384E6 /* Main.storyboard */,
+				42940CDD29C8AB2A006384E6 /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +174,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				42940CDF29C8AB2A006384E6 /* LaunchScreen.storyboard in Resources */,
+				42940CF829CF59F3006384E6 /* Poppins-Light.ttf in Resources */,
+				42940CF429CF55B0006384E6 /* Poppins-SemiBold.ttf in Resources */,
 				42940CDC29C8AB2A006384E6 /* Assets.xcassets in Resources */,
+				42940CF629CF55C1006384E6 /* Poppins-Bold.ttf in Resources */,
 				42940CDA29C8AB29006384E6 /* Main.storyboard in Resources */,
+				42940CF229CF558F006384E6 /* Poppins-Regular.ttf in Resources */,
+				42940CFC29D03B7B006384E6 /* Poppins-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +191,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42940CFA29D0348A006384E6 /* LoginViewController.swift in Sources */,
+				42940CE729CBF51C006384E6 /* SecondViewController.swift in Sources */,
+				42940CEE29CF4DE0006384E6 /* RegisterViewController.swift in Sources */,
 				42940CD729C8AB29006384E6 /* ViewController.swift in Sources */,
 				42940CD329C8AB29006384E6 /* AppDelegate.swift in Sources */,
 				42940CD529C8AB29006384E6 /* SceneDelegate.swift in Sources */,
@@ -292,7 +348,6 @@
 				INFOPLIST_FILE = JailFitness/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +375,6 @@
 				INFOPLIST_FILE = JailFitness/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
