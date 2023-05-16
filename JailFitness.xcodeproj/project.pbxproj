@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		424CE1C229D9D0310064BE4E /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CE1C129D9D0310064BE4E /* ExerciseTableViewCell.swift */; };
+		424CE1C529D9FC180064BE4E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 424CE1C429D9FC180064BE4E /* Alamofire */; };
+		424CE1C729D9FC430064BE4E /* APIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CE1C629D9FC430064BE4E /* APIFunctions.swift */; };
+		4270805529E88B6200EC9583 /* AddExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805429E88B6200EC9583 /* AddExercisesViewController.swift */; };
+		4270805729E8926D00EC9583 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805629E8926D00EC9583 /* WorkoutViewController.swift */; };
+		4270805929E9A49D00EC9583 /* MyPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805829E9A49D00EC9583 /* MyPlanViewController.swift */; };
+		4270805B29E9A4C200EC9583 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805A29E9A4C200EC9583 /* ProgressViewController.swift */; };
+		4270805D29E9A4DD00EC9583 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805C29E9A4DD00EC9583 /* SettingsViewController.swift */; };
 		42940CD329C8AB29006384E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CD229C8AB29006384E6 /* AppDelegate.swift */; };
 		42940CD529C8AB29006384E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CD429C8AB29006384E6 /* SceneDelegate.swift */; };
 		42940CD729C8AB29006384E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CD629C8AB29006384E6 /* ViewController.swift */; };
@@ -21,9 +29,17 @@
 		42940CF829CF59F3006384E6 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CF729CF59F3006384E6 /* Poppins-Light.ttf */; };
 		42940CFA29D0348A006384E6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CF929D0348A006384E6 /* LoginViewController.swift */; };
 		42940CFC29D03B7B006384E6 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CFB29D03B7B006384E6 /* Poppins-Medium.ttf */; };
+		42940D0029D6C069006384E6 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CFF29D6C069006384E6 /* ExerciseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		424CE1C129D9D0310064BE4E /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		424CE1C629D9FC430064BE4E /* APIFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFunctions.swift; sourceTree = "<group>"; };
+		4270805429E88B6200EC9583 /* AddExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercisesViewController.swift; sourceTree = "<group>"; };
+		4270805629E8926D00EC9583 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		4270805829E9A49D00EC9583 /* MyPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlanViewController.swift; sourceTree = "<group>"; };
+		4270805A29E9A4C200EC9583 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		4270805C29E9A4DD00EC9583 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		42940CCF29C8AB29006384E6 /* JailFitness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JailFitness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42940CD229C8AB29006384E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42940CD429C8AB29006384E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +56,7 @@
 		42940CF729CF59F3006384E6 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		42940CF929D0348A006384E6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		42940CFB29D03B7B006384E6 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		42940CFF29D6C069006384E6 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				424CE1C529D9FC180064BE4E /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,10 +90,11 @@
 		42940CD129C8AB29006384E6 /* JailFitness */ = {
 			isa = PBXGroup;
 			children = (
-				42940CEF29CF54FF006384E6 /* Fonts */,
 				42940CFD29D34E8A006384E6 /* Views */,
 				42940CFE29D34EB8006384E6 /* Supporting */,
+				42940CEF29CF54FF006384E6 /* Fonts */,
 				42940CE029C8AB2A006384E6 /* Info.plist */,
+				424CE1C629D9FC430064BE4E /* APIFunctions.swift */,
 			);
 			path = JailFitness;
 			sourceTree = "<group>";
@@ -99,6 +118,13 @@
 				42940CE629CBF51C006384E6 /* SecondViewController.swift */,
 				42940CED29CF4DE0006384E6 /* RegisterViewController.swift */,
 				42940CF929D0348A006384E6 /* LoginViewController.swift */,
+				42940CFF29D6C069006384E6 /* ExerciseViewController.swift */,
+				424CE1C129D9D0310064BE4E /* ExerciseTableViewCell.swift */,
+				4270805429E88B6200EC9583 /* AddExercisesViewController.swift */,
+				4270805629E8926D00EC9583 /* WorkoutViewController.swift */,
+				4270805829E9A49D00EC9583 /* MyPlanViewController.swift */,
+				4270805A29E9A4C200EC9583 /* ProgressViewController.swift */,
+				4270805C29E9A4DD00EC9583 /* SettingsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +157,9 @@
 			dependencies = (
 			);
 			name = JailFitness;
+			packageProductDependencies = (
+				424CE1C429D9FC180064BE4E /* Alamofire */,
+			);
 			productName = JailFitness;
 			productReference = 42940CCF29C8AB29006384E6 /* JailFitness.app */;
 			productType = "com.apple.product-type.application";
@@ -159,6 +188,9 @@
 				Base,
 			);
 			mainGroup = 42940CC629C8AB29006384E6;
+			packageReferences = (
+				424CE1C329D9FC180064BE4E /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 42940CD029C8AB29006384E6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -191,11 +223,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4270805529E88B6200EC9583 /* AddExercisesViewController.swift in Sources */,
+				4270805929E9A49D00EC9583 /* MyPlanViewController.swift in Sources */,
 				42940CFA29D0348A006384E6 /* LoginViewController.swift in Sources */,
+				4270805729E8926D00EC9583 /* WorkoutViewController.swift in Sources */,
+				4270805B29E9A4C200EC9583 /* ProgressViewController.swift in Sources */,
+				424CE1C229D9D0310064BE4E /* ExerciseTableViewCell.swift in Sources */,
+				42940D0029D6C069006384E6 /* ExerciseViewController.swift in Sources */,
 				42940CE729CBF51C006384E6 /* SecondViewController.swift in Sources */,
 				42940CEE29CF4DE0006384E6 /* RegisterViewController.swift in Sources */,
+				4270805D29E9A4DD00EC9583 /* SettingsViewController.swift in Sources */,
 				42940CD729C8AB29006384E6 /* ViewController.swift in Sources */,
 				42940CD329C8AB29006384E6 /* AppDelegate.swift in Sources */,
+				424CE1C729D9FC430064BE4E /* APIFunctions.swift in Sources */,
 				42940CD529C8AB29006384E6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +452,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		424CE1C329D9FC180064BE4E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		424CE1C429D9FC180064BE4E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 424CE1C329D9FC180064BE4E /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42940CC729C8AB29006384E6 /* Project object */;
 }

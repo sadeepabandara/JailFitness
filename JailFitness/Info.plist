@@ -27,5 +27,7 @@
 		<string>Poppins-SemiBold.ttf</string>
 		<string>Poppins-Bold.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow acces</string>
 </dict>
 </plist>
