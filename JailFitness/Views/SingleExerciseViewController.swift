@@ -31,7 +31,6 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         label.textColor = .gray
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.frame = CGRect(x: 0, y: 0, width: 200, height: 0)
         label.sizeToFit()
         return label
     }()
@@ -45,14 +44,63 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         return label
     }()
     
+    let repsLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Poppins-SemiBold", size: 20)
+        label.text = "How many reps?"
+        label.textColor = .white
+        return label
+    }()
+    
+    let weightLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Poppins-SemiBold", size: 20)
+        label.text = "How much weight?"
+        label.textColor = .white
+        return label
+    }()
+    
+    let startBtn : UIButton = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Start Workout", for: .normal)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = customYellow
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        return button
+    }()
     
     var webView: WKWebView!
     
-    let pickerView = UIPickerView()
-    let textField = UITextField()
+    let setsPickerView = UIPickerView()
+    let setsTextField = UITextField()
     let setsCounts: [Int] = {
         var counts = [Int]()
+        for count in 1...10 {
+            counts.append(count)
+        }
+        return counts
+    }()
+    
+    let repsPickerView = UIPickerView()
+    let repsTextField = UITextField()
+    let repsCounts: [Int] = {
+        var counts = [Int]()
         for count in 1...20 {
+            counts.append(count)
+        }
+        return counts
+    }()
+    
+    let weightPickerView = UIPickerView()
+    let weightTextField = UITextField()
+    let weightSizes: [Int] = {
+        var counts = [Int]()
+        for count in 1...200 {
             counts.append(count)
         }
         return counts
@@ -64,22 +112,56 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         navigationController?.navigationBar.tintColor = customYellow
                 
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textAlignment = .center
-        textField.backgroundColor = customBlueLight
-        textField.font = UIFont.systemFont(ofSize: 18)
-        textField.borderStyle = .roundedRect
-        textField.borderStyle = .roundedRect
-        textField.layer.shadowOpacity = 0.1
-        textField.layer.shadowColor = UIColor.gray.cgColor
-        textField.layer.shadowRadius = 1
-        textField.textColor = .white
-        view.addSubview(textField)
+        setsTextField.translatesAutoresizingMaskIntoConstraints = false
+        setsTextField.textAlignment = .center
+        setsTextField.backgroundColor = customBlueLight
+        setsTextField.font = UIFont.systemFont(ofSize: 18)
+        setsTextField.borderStyle = .roundedRect
+        setsTextField.borderStyle = .roundedRect
+        setsTextField.layer.shadowOpacity = 0.1
+        setsTextField.layer.shadowColor = UIColor.gray.cgColor
+        setsTextField.layer.shadowRadius = 1
+        setsTextField.textColor = .white
+        view.addSubview(setsTextField)
         
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        textField.inputView = pickerView
-        pickerView.backgroundColor = customBlueLight
+        repsTextField.translatesAutoresizingMaskIntoConstraints = false
+        repsTextField.textAlignment = .center
+        repsTextField.backgroundColor = customBlueLight
+        repsTextField.font = UIFont.systemFont(ofSize: 18)
+        repsTextField.borderStyle = .roundedRect
+        repsTextField.borderStyle = .roundedRect
+        repsTextField.layer.shadowOpacity = 0.1
+        repsTextField.layer.shadowColor = UIColor.gray.cgColor
+        repsTextField.layer.shadowRadius = 1
+        repsTextField.textColor = .white
+        view.addSubview(repsTextField)
+        
+        weightTextField.translatesAutoresizingMaskIntoConstraints = false
+        weightTextField.textAlignment = .center
+        weightTextField.backgroundColor = customBlueLight
+        weightTextField.font = UIFont.systemFont(ofSize: 18)
+        weightTextField.borderStyle = .roundedRect
+        weightTextField.borderStyle = .roundedRect
+        weightTextField.layer.shadowOpacity = 0.1
+        weightTextField.layer.shadowColor = UIColor.gray.cgColor
+        weightTextField.layer.shadowRadius = 1
+        weightTextField.textColor = .white
+        view.addSubview(weightTextField)
+        
+        setsPickerView.delegate = self
+        setsPickerView.dataSource = self
+        setsTextField.inputView = setsPickerView
+        setsPickerView.backgroundColor = customBlueLight
+        
+        repsPickerView.delegate = self
+        repsPickerView.dataSource = self
+        repsTextField.inputView = repsPickerView
+        repsPickerView.backgroundColor = customBlueLight
+        
+        weightPickerView.delegate = self
+        weightPickerView.dataSource = self
+        weightTextField.inputView = weightPickerView
+        weightPickerView.backgroundColor = customBlueLight
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -88,7 +170,9 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         doneButton.tintColor = customYellow
         toolbar.barTintColor = customBlue
         
-        textField.inputAccessoryView = toolbar
+        setsTextField.inputAccessoryView = toolbar
+        repsTextField.inputAccessoryView = toolbar
+        weightTextField.inputAccessoryView = toolbar
         
         configureWebView()
         loadYouTubeVideo(videoId: "yTWO2th-RIY")
@@ -101,6 +185,9 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         view.addSubview(exerciseLabel)
         view.addSubview(descLabel)
         view.addSubview(setsLabel)
+        view.addSubview(repsLabel)
+        view.addSubview(weightLabel)
+        view.addSubview(startBtn)
     }
     
     func setupConstraints() {
@@ -116,11 +203,34 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
             setsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             setsLabel.topAnchor.constraint(equalTo: descLabel.bottomAnchor, constant: 15),
             
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            textField.topAnchor.constraint(equalTo: setsLabel.bottomAnchor, constant: 10),
-            textField.widthAnchor.constraint(equalToConstant: 200),
-            textField.heightAnchor.constraint(equalToConstant: 40),
+            setsTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            setsTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            setsTextField.topAnchor.constraint(equalTo: setsLabel.bottomAnchor, constant: 10),
+            setsTextField.widthAnchor.constraint(equalToConstant: 200),
+            setsTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            repsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            repsLabel.topAnchor.constraint(equalTo: setsTextField.bottomAnchor, constant: 15),
+            
+            repsTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            repsTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            repsTextField.topAnchor.constraint(equalTo: repsLabel.bottomAnchor, constant: 10),
+            repsTextField.widthAnchor.constraint(equalToConstant: 200),
+            repsTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            weightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            weightLabel.topAnchor.constraint(equalTo: repsTextField.bottomAnchor, constant: 15),
+            
+            weightTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            weightTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            weightTextField.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 10),
+            weightTextField.widthAnchor.constraint(equalToConstant: 200),
+            weightTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            startBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            startBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            startBtn.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 20),
+            startBtn.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -129,27 +239,58 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
         
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return setsCounts.count
+        if pickerView == setsPickerView {
+            return setsCounts.count
+        } else if pickerView == repsPickerView {
+            return repsCounts.count
+        } else if pickerView == weightPickerView {
+            return weightSizes.count
+        }
+                
+        return 0
     }
         
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let setsCount = setsCounts[row]
-        let attributes: [NSAttributedString.Key: Any] = [ .foregroundColor: UIColor.white,
-            .font: UIFont.boldSystemFont(ofSize: 18)
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor.white,
+                .font: UIFont.boldSystemFont(ofSize: 18)
         ]
-                        
-        let attributedString = NSAttributedString(string: "\(setsCount) sets", attributes: attributes)
-                
-        return attributedString
+        
+        if pickerView == setsPickerView {
+            let setsCount = setsCounts[row]
+            let attributedString = NSAttributedString(string: "\(setsCount) sets", attributes: attributes)
+            return attributedString
+        } else if pickerView == repsPickerView {
+            let repsCount = repsCounts[row]
+            let attributedString = NSAttributedString(string: "\(repsCount) reps", attributes: attributes)
+            return attributedString
+        } else if pickerView == weightPickerView {
+            let weightSize = weightSizes[row]
+            let attributedString = NSAttributedString(string: "\(weightSize) kg", attributes: attributes)
+            return attributedString
+        }
+            
+        return nil
     }
         
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedSetsCount = setsCounts[row]
-        textField.text = "\(selectedSetsCount)"
+        if pickerView == setsPickerView {
+            let selectedSetsCount = setsCounts[row]
+            setsTextField.text = "\(selectedSetsCount)"
+        } else if pickerView == repsPickerView {
+            let selectedRepsCount = repsCounts[row]
+            repsTextField.text = "\(selectedRepsCount)"
+        } else if pickerView == weightPickerView {
+            let selectedWeightSize = weightSizes[row]
+            weightTextField.text = "\(selectedWeightSize)"
+        }
     }
         
     @objc func doneButtonTapped() {
-        textField.resignFirstResponder()
+        setsTextField.resignFirstResponder()
+        repsTextField.resignFirstResponder()
+        weightTextField.resignFirstResponder()
     }
 
     func configureWebView() {

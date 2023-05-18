@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let vc = UINavigationController(rootViewController: SingleExerciseViewController())
+        let vc = UINavigationController(rootViewController: MyPlanViewController())
         
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
