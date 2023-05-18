@@ -91,9 +91,7 @@ class AddExercisesViewController: UIViewController {
     }
     
     @objc func goToExercise() {
-//        let vc = ExerciseViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-        APIFunctions.functions.addExercise(image: "Barbell Image", title: exerciseText.text!)
+
     }
     
     func tapGasture() {

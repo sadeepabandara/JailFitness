@@ -7,15 +7,9 @@
 
 import UIKit
 
-protocol DataDelegate {
-    func updateArray(newArray: String)
-}
-
 class ExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
-    
-    var exercisesArray = [Exercise]()
     
     let exercisesTableView: UITableView = {
         let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
@@ -29,9 +23,6 @@ class ExerciseViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         view.backgroundColor = customBlue
         title = "Exercises"
-        APIFunctions.functions.delegate = self
-        APIFunctions.functions.fetchExercises()
-//        print(exercisesArray)
         
         addExercises()
         addComponents()
@@ -68,25 +59,12 @@ class ExerciseViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exercisesArray.count
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ExerciseTableViewCell
         cell.contentView.backgroundColor = customBlue
-        cell.textLabel?.text = exercisesArray[indexPath.row].title
-        cell.textLabel?.textColor = .white
         return cell
-    }
-}
-
-extension ExerciseViewController: DataDelegate {
-    func updateArray(newArray: String) {
-        do {
-            exercisesArray = try JSONDecoder().decode([Exercise].self, from: newArray.data(using: .utf8)!)
-        } catch {
-            print("Failed to decode")
-        }
-        self.exercisesTableView.reloadData()
     }
 }

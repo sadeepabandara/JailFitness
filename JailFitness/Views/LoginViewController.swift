@@ -9,20 +9,25 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
+    let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
+    let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
+    
     let logLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Log"
-        label.textColor = .black
+        label.textColor = .white
         label.font = UIFont(name: "Poppins-Bold", size: 32)
         return label
     }()
     
     let inLabel : UILabel = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "In."
-        label.textColor = .orange
+        label.textColor = customYellow
         label.font = UIFont(name: "Poppins-Bold", size: 32)
         return label
     }()
@@ -50,10 +55,11 @@ class LoginViewController: UIViewController {
     }()
     
     let registerbtn : UIButton = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Register", for: .normal)
-        button.setTitleColor(.orange , for: .normal)
+        button.setTitleColor(customYellow, for: .normal)
         button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 14)
         return button
     }()
@@ -81,11 +87,13 @@ class LoginViewController: UIViewController {
     }()
     
     let userText : UITextField = {
+        let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.layer.shadowOpacity = 0.1
         textField.layer.shadowColor = UIColor.gray.cgColor
+        textField.backgroundColor = customBlueLight
         textField.layer.shadowRadius = 1
         textField.keyboardType = .default
         return textField
@@ -101,21 +109,24 @@ class LoginViewController: UIViewController {
     }()
     
     let passwordText : UITextField = {
+        let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.layer.shadowOpacity = 0.1
         textField.layer.shadowColor = UIColor.gray.cgColor
+        textField.backgroundColor = customBlueLight
         textField.layer.shadowRadius = 1
         textField.keyboardType = .default
         return textField
     }()
     
     let checkBox : UISwitch = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
         let check = UISwitch()
         check.translatesAutoresizingMaskIntoConstraints = false
         check.frame = CGRect(x: 50, y: 50, width: 0, height: 0)
-        check.onTintColor = .orange
+        check.onTintColor = customYellow
         return check
     }()
     
@@ -142,36 +153,63 @@ class LoginViewController: UIViewController {
     }()
     
     let loginBtn : UIButton = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log In", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
-        button.backgroundColor = .orange
+        button.backgroundColor = customYellow
         button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
         return button
     }()
     
+    let googleBtn : UIButton = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("  Sign in with Google", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        button.layer.cornerRadius = 10
+        button.setTitleColor(.white , for: .normal)
+        button.layer.borderWidth = 2.0
+        button.layer.borderColor = customYellow.cgColor
+        button.setImage(UIImage(named: "googleIcon"), for: .normal)
+        return button
+    }()
+    
     let forgotButton : UIButton = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Forgot me", for: .normal)
-        button.setTitleColor(.orange, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.setTitleColor(customYellow, for: .normal)
         button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = customBlue
+        
+        navigationController?.navigationBar.tintColor = customYellow
 
         addComponents()
         setupConstraints()
         
         registerbtn.addTarget(self, action: #selector(goToRegister), for: .touchUpInside)
+        
+        googleBtn.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
     }
     
     @objc func goToRegister() {
         let vc = RegisterViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func goToNext() {
+        let vc = GenderViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -197,6 +235,7 @@ class LoginViewController: UIViewController {
         view.addSubview(mainView3)
         
         view.addSubview(loginBtn)
+        view.addSubview(googleBtn)
         view.addSubview(forgotButton)
     }
     
@@ -264,9 +303,14 @@ class LoginViewController: UIViewController {
             loginBtn.topAnchor.constraint(equalTo: mainView3.bottomAnchor, constant: 30),
             loginBtn.heightAnchor.constraint(equalToConstant: 40),
             
+            googleBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            googleBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            googleBtn.topAnchor.constraint(equalTo: loginBtn.bottomAnchor, constant: 20),
+            googleBtn.heightAnchor.constraint(equalToConstant: 40),
+            
             forgotButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            forgotButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -290),
-            forgotButton.topAnchor.constraint(equalTo: loginBtn.bottomAnchor, constant: 20)
+            forgotButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            forgotButton.topAnchor.constraint(equalTo: googleBtn.bottomAnchor, constant: 10),
         ])
     }
 

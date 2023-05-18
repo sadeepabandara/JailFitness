@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		424C8F872A13B94F00E7FF66 /* MyPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F862A13B94F00E7FF66 /* MyPlanTableViewCell.swift */; };
+		424C8F8A2A13E76100E7FF66 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F892A13E76100E7FF66 /* GenderViewController.swift */; };
+		424C8F8C2A148AF300E7FF66 /* AgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F8B2A148AF300E7FF66 /* AgeViewController.swift */; };
+		424C8F8E2A1496C600E7FF66 /* HeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F8D2A1496C600E7FF66 /* HeightViewController.swift */; };
+		424C8F902A1498FE00E7FF66 /* WeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F8F2A1498FE00E7FF66 /* WeightViewController.swift */; };
+		424C8F922A14D03000E7FF66 /* ExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F912A14D03000E7FF66 /* ExperienceViewController.swift */; };
+		424C8F942A14D28F00E7FF66 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F932A14D28F00E7FF66 /* GoalViewController.swift */; };
+		424C8F962A15F1EA00E7FF66 /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F952A15F1EA00E7FF66 /* BMIViewController.swift */; };
+		424C8F982A16764300E7FF66 /* SingleExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F972A16764300E7FF66 /* SingleExerciseViewController.swift */; };
 		424CE1C229D9D0310064BE4E /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CE1C129D9D0310064BE4E /* ExerciseTableViewCell.swift */; };
 		424CE1C529D9FC180064BE4E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 424CE1C429D9FC180064BE4E /* Alamofire */; };
-		424CE1C729D9FC430064BE4E /* APIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424CE1C629D9FC430064BE4E /* APIFunctions.swift */; };
 		4270805529E88B6200EC9583 /* AddExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805429E88B6200EC9583 /* AddExercisesViewController.swift */; };
-		4270805729E8926D00EC9583 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805629E8926D00EC9583 /* WorkoutViewController.swift */; };
+		4270805729E8926D00EC9583 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805629E8926D00EC9583 /* ScheduleViewController.swift */; };
 		4270805929E9A49D00EC9583 /* MyPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805829E9A49D00EC9583 /* MyPlanViewController.swift */; };
 		4270805B29E9A4C200EC9583 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805A29E9A4C200EC9583 /* ProgressViewController.swift */; };
-		4270805D29E9A4DD00EC9583 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805C29E9A4DD00EC9583 /* SettingsViewController.swift */; };
+		4270805D29E9A4DD00EC9583 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805C29E9A4DD00EC9583 /* ProfileViewController.swift */; };
 		42940CD329C8AB29006384E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CD229C8AB29006384E6 /* AppDelegate.swift */; };
 		42940CD529C8AB29006384E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CD429C8AB29006384E6 /* SceneDelegate.swift */; };
 		42940CD729C8AB29006384E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CD629C8AB29006384E6 /* ViewController.swift */; };
@@ -33,13 +41,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		424C8F862A13B94F00E7FF66 /* MyPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlanTableViewCell.swift; sourceTree = "<group>"; };
+		424C8F892A13E76100E7FF66 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		424C8F8B2A148AF300E7FF66 /* AgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewController.swift; sourceTree = "<group>"; };
+		424C8F8D2A1496C600E7FF66 /* HeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightViewController.swift; sourceTree = "<group>"; };
+		424C8F8F2A1498FE00E7FF66 /* WeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewController.swift; sourceTree = "<group>"; };
+		424C8F912A14D03000E7FF66 /* ExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceViewController.swift; sourceTree = "<group>"; };
+		424C8F932A14D28F00E7FF66 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
+		424C8F952A15F1EA00E7FF66 /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
+		424C8F972A16764300E7FF66 /* SingleExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleExerciseViewController.swift; sourceTree = "<group>"; };
 		424CE1C129D9D0310064BE4E /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
-		424CE1C629D9FC430064BE4E /* APIFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFunctions.swift; sourceTree = "<group>"; };
 		4270805429E88B6200EC9583 /* AddExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercisesViewController.swift; sourceTree = "<group>"; };
-		4270805629E8926D00EC9583 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		4270805629E8926D00EC9583 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		4270805829E9A49D00EC9583 /* MyPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlanViewController.swift; sourceTree = "<group>"; };
 		4270805A29E9A4C200EC9583 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
-		4270805C29E9A4DD00EC9583 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4270805C29E9A4DD00EC9583 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		42940CCF29C8AB29006384E6 /* JailFitness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JailFitness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42940CD229C8AB29006384E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42940CD429C8AB29006384E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +87,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		424C8F882A13E11200E7FF66 /* Starter Views */ = {
+			isa = PBXGroup;
+			children = (
+				424C8F892A13E76100E7FF66 /* GenderViewController.swift */,
+				424C8F8B2A148AF300E7FF66 /* AgeViewController.swift */,
+				424C8F8D2A1496C600E7FF66 /* HeightViewController.swift */,
+				424C8F8F2A1498FE00E7FF66 /* WeightViewController.swift */,
+				424C8F912A14D03000E7FF66 /* ExperienceViewController.swift */,
+				424C8F932A14D28F00E7FF66 /* GoalViewController.swift */,
+				424C8F952A15F1EA00E7FF66 /* BMIViewController.swift */,
+			);
+			path = "Starter Views";
+			sourceTree = "<group>";
+		};
 		42940CC629C8AB29006384E6 = {
 			isa = PBXGroup;
 			children = (
@@ -90,11 +120,11 @@
 		42940CD129C8AB29006384E6 /* JailFitness */ = {
 			isa = PBXGroup;
 			children = (
+				424C8F882A13E11200E7FF66 /* Starter Views */,
 				42940CFD29D34E8A006384E6 /* Views */,
 				42940CFE29D34EB8006384E6 /* Supporting */,
 				42940CEF29CF54FF006384E6 /* Fonts */,
 				42940CE029C8AB2A006384E6 /* Info.plist */,
-				424CE1C629D9FC430064BE4E /* APIFunctions.swift */,
 			);
 			path = JailFitness;
 			sourceTree = "<group>";
@@ -121,10 +151,12 @@
 				42940CFF29D6C069006384E6 /* ExerciseViewController.swift */,
 				424CE1C129D9D0310064BE4E /* ExerciseTableViewCell.swift */,
 				4270805429E88B6200EC9583 /* AddExercisesViewController.swift */,
-				4270805629E8926D00EC9583 /* WorkoutViewController.swift */,
+				4270805629E8926D00EC9583 /* ScheduleViewController.swift */,
 				4270805829E9A49D00EC9583 /* MyPlanViewController.swift */,
 				4270805A29E9A4C200EC9583 /* ProgressViewController.swift */,
-				4270805C29E9A4DD00EC9583 /* SettingsViewController.swift */,
+				4270805C29E9A4DD00EC9583 /* ProfileViewController.swift */,
+				424C8F862A13B94F00E7FF66 /* MyPlanTableViewCell.swift */,
+				424C8F972A16764300E7FF66 /* SingleExerciseViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,19 +255,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				424C8F902A1498FE00E7FF66 /* WeightViewController.swift in Sources */,
+				424C8F962A15F1EA00E7FF66 /* BMIViewController.swift in Sources */,
+				424C8F942A14D28F00E7FF66 /* GoalViewController.swift in Sources */,
+				424C8F872A13B94F00E7FF66 /* MyPlanTableViewCell.swift in Sources */,
+				424C8F982A16764300E7FF66 /* SingleExerciseViewController.swift in Sources */,
 				4270805529E88B6200EC9583 /* AddExercisesViewController.swift in Sources */,
 				4270805929E9A49D00EC9583 /* MyPlanViewController.swift in Sources */,
 				42940CFA29D0348A006384E6 /* LoginViewController.swift in Sources */,
-				4270805729E8926D00EC9583 /* WorkoutViewController.swift in Sources */,
+				4270805729E8926D00EC9583 /* ScheduleViewController.swift in Sources */,
 				4270805B29E9A4C200EC9583 /* ProgressViewController.swift in Sources */,
+				424C8F922A14D03000E7FF66 /* ExperienceViewController.swift in Sources */,
+				424C8F8A2A13E76100E7FF66 /* GenderViewController.swift in Sources */,
 				424CE1C229D9D0310064BE4E /* ExerciseTableViewCell.swift in Sources */,
+				424C8F8E2A1496C600E7FF66 /* HeightViewController.swift in Sources */,
 				42940D0029D6C069006384E6 /* ExerciseViewController.swift in Sources */,
 				42940CE729CBF51C006384E6 /* SecondViewController.swift in Sources */,
 				42940CEE29CF4DE0006384E6 /* RegisterViewController.swift in Sources */,
-				4270805D29E9A4DD00EC9583 /* SettingsViewController.swift in Sources */,
+				4270805D29E9A4DD00EC9583 /* ProfileViewController.swift in Sources */,
 				42940CD729C8AB29006384E6 /* ViewController.swift in Sources */,
 				42940CD329C8AB29006384E6 /* AppDelegate.swift in Sources */,
-				424CE1C729D9FC430064BE4E /* APIFunctions.swift in Sources */,
+				424C8F8C2A148AF300E7FF66 /* AgeViewController.swift in Sources */,
 				42940CD529C8AB29006384E6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
