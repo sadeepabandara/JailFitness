@@ -25,7 +25,7 @@ class MyPlanTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont(name: "Poppins-Regular", size: 18)
+        label.font = UIFont(name: "Poppins-SemiBold", size: 20)
         label.text = "Error"
         return label
     }()
@@ -59,7 +59,7 @@ class MyPlanTableViewCell: UITableViewCell {
             myPlanImageView.heightAnchor.constraint(equalToConstant: 120),
             myPlanImageView.widthAnchor.constraint(equalToConstant: 90),
             
-            myPlanLabel.leadingAnchor.constraint(equalTo: myPlanImageView.trailingAnchor, constant: 10),
+            myPlanLabel.leadingAnchor.constraint(equalTo: myPlanImageView.trailingAnchor, constant: 20),
             myPlanLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             myPlanLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             myPlanLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),

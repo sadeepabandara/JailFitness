@@ -73,19 +73,19 @@ class MyPlanViewController: UIViewController {
     }()
     
     let images : [UIImage] = [
+        UIImage(named: "dumbellCurl")!,
         UIImage(named: "barbellCurl")!,
-        UIImage(named: "barbellCurl")!,
-        UIImage(named: "barbellCurl")!,
-        UIImage(named: "barbellCurl")!,
-        UIImage(named: "barbellCurl")!,
+        UIImage(named: "squat")!,
+        UIImage(named: "cableCrossOver")!,
+        UIImage(named: "oneArmRow")!,
     ]
     
     let desc : [String] = [
+        "Dumbell Curl",
         "Barbell Curl",
-        "Barbell Curl",
-        "Barbell Curl",
-        "Barbell Curl",
-        "Barbell Curl",
+        "Squat",
+        "Cable Cross Over",
+        "One Arm Row",
     ]
     
     let tableView : UITableView = {

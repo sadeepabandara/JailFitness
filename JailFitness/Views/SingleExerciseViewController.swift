@@ -76,6 +76,9 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var webView: WKWebView!
     
+    var startTime: Date?
+    var timer: Timer?
+    
     let setsPickerView = UIPickerView()
     let setsTextField = UITextField()
     let setsCounts: [Int] = {
@@ -111,7 +114,9 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         view.backgroundColor = customBlue
         
         navigationController?.navigationBar.tintColor = customYellow
-                
+        
+        startBtn.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        
         setsTextField.translatesAutoresizingMaskIntoConstraints = false
         setsTextField.textAlignment = .center
         setsTextField.backgroundColor = customBlueLight
@@ -229,9 +234,137 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             startBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             startBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            startBtn.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 20),
+            startBtn.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 40),
             startBtn.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    let stopwatchLabel = UILabel()
+    
+    func showPopup() {
+        let popup = UIView()
+        popup.translatesAutoresizingMaskIntoConstraints = false
+        popup.backgroundColor = .systemGray5
+        popup.layer.cornerRadius = 10
+        popup.layer.shadowColor = UIColor.gray.cgColor
+        popup.layer.shadowOpacity = 0.2
+        popup.layer.shadowOffset = CGSize(width: 0, height: 2)
+        
+        
+        stopwatchLabel.translatesAutoresizingMaskIntoConstraints = false
+        stopwatchLabel.font = UIFont(name: "Poppins-Bold", size: 36)
+        stopwatchLabel.textColor = customBlue
+        stopwatchLabel.text = "00:00:00"
+        
+        let startStopwatchButton = UIButton()
+        startStopwatchButton.translatesAutoresizingMaskIntoConstraints = false
+        startStopwatchButton.setTitle("Start", for: .normal)
+        startStopwatchButton.backgroundColor = customYellow
+        startStopwatchButton.setTitleColor(.black, for: .normal)
+        startStopwatchButton.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        startStopwatchButton.layer.cornerRadius = 10
+        startStopwatchButton.addTarget(self, action: #selector(startStopwatch), for: .touchUpInside)
+
+        
+        let finishStopwatchButton = UIButton()
+        finishStopwatchButton.translatesAutoresizingMaskIntoConstraints = false
+        finishStopwatchButton.setTitle("Stop", for: .normal)
+        finishStopwatchButton.backgroundColor = customYellow
+        finishStopwatchButton.setTitleColor(.black, for: .normal)
+        finishStopwatchButton.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        finishStopwatchButton.layer.cornerRadius = 10
+        finishStopwatchButton.addTarget(self, action: #selector(resetStopwatch), for: .touchUpInside)
+            
+        
+        popup.addSubview(stopwatchLabel)
+        popup.addSubview(startStopwatchButton)
+        popup.addSubview(finishStopwatchButton)
+        
+        view.addSubview(popup)
+        
+        NSLayoutConstraint.activate([
+            popup.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            popup.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            popup.widthAnchor.constraint(equalToConstant: 300),
+            popup.heightAnchor.constraint(equalToConstant: 250),
+            
+            stopwatchLabel.centerXAnchor.constraint(equalTo: popup.centerXAnchor),
+            stopwatchLabel.topAnchor.constraint(equalTo: popup.topAnchor, constant: 20),
+            
+            startStopwatchButton.centerXAnchor.constraint(equalTo: popup.centerXAnchor),
+            startStopwatchButton.topAnchor.constraint(equalTo: stopwatchLabel.bottomAnchor, constant: 20),
+            startStopwatchButton.widthAnchor.constraint(equalToConstant: 120),
+            startStopwatchButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            finishStopwatchButton.centerXAnchor.constraint(equalTo: popup.centerXAnchor),
+            finishStopwatchButton.topAnchor.constraint(equalTo: startStopwatchButton.bottomAnchor, constant: 20),
+            finishStopwatchButton.widthAnchor.constraint(equalToConstant: 120),
+            finishStopwatchButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    @objc func startStopwatch() {
+        startTime = Date()
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateStopwatch), userInfo: nil, repeats: true)
+    }
+    
+    @objc func resetStopwatch() {
+        timer?.invalidate()
+        timer = nil
+        startTime = nil
+        stopwatchLabel.text = "00:00:00"
+        view.subviews.last?.removeFromSuperview()
+    }
+        
+    @objc func updateStopwatch() {
+        guard let startTime = startTime else { return }
+        let currentTime = Date()
+        let elapsedTime = currentTime.timeIntervalSince(startTime)
+            
+        let hours = Int(elapsedTime / 3600)
+        let minutes = Int((elapsedTime.truncatingRemainder(dividingBy: 3600)) / 60)
+        let seconds = Int(elapsedTime.truncatingRemainder(dividingBy: 60))
+            
+        let formattedTime = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        stopwatchLabel.text = formattedTime
+    }
+    
+    var errorLabel: UILabel?
+    
+    @objc func startButtonTapped() {
+        if let setsTextField = setsTextField.text, setsTextField.isEmpty {
+            displayErrorMessage("Missing weight - Please enter your sets count")
+        } else if let repsTextField = repsTextField.text,
+            repsTextField.isEmpty {
+            displayErrorMessage("Missing weight - Please enter your reps count")
+        } else if let weightTextField = weightTextField.text, weightTextField.isEmpty {
+            displayErrorMessage("Missing weight - Please enter your weight size")
+        } else {
+            errorLabel?.removeFromSuperview()
+            showPopup()
+        }
+    }
+    
+    func displayErrorMessage(_ message: String) {
+        errorLabel?.removeFromSuperview()
+        
+        let errorLabel = UILabel()
+        let customOrange = UIColor(red: 249.0/255.0, green: 155.0/255.0, blue: 125.0/255.0, alpha: 1)
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.font = UIFont(name: "Poppins-Medium", size: 16)
+        errorLabel.textColor = customOrange
+        errorLabel.textAlignment = .center
+        errorLabel.text = message
+        
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            errorLabel.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 5)
+        ])
+        
+        self.errorLabel = errorLabel
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
