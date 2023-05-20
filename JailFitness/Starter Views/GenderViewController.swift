@@ -79,8 +79,6 @@ class GenderViewController: UIViewController {
         
         let vc = AgeViewController()
         navigationController?.pushViewController(vc, animated: true)
-        
-        
     }
     
     @objc func goToAgeFemale() {

@@ -88,6 +88,8 @@ class ViewController: UIViewController {
         addComponents()
         setupConstraints()
         
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        
         button.addTarget(self, action: #selector(goNext), for: .touchUpInside)
     }
     

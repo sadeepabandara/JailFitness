@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>100019381975-rjhikk2leckj3f1lacc8ug5c8aahutk0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.100019381975-rjhikk2leckj3f1lacc8ug5c8aahutk0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDXuV04GjQWFqNYu96mgQeBYJx7ecf4tqE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>100019381975</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sadeepa.JailFitness</string>
+	<key>PROJECT_ID</key>
+	<string>jailfitness-c8000</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jailfitness-c8000.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:100019381975:ios:79581502d458d396f93292</string>
+</dict>
+</plist>

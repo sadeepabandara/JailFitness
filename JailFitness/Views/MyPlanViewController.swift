@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MyPlanViewController: UIViewController {
     
@@ -101,14 +102,18 @@ class MyPlanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = customBlue
-        let textColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
-        UINavigationBar.appearance().titleTextAttributes = textColor
         
         addComponents()
         setupConstraints()
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if Auth.auth().currentUser == nil {
+            let vc = ViewController()
+            navigationController?.pushViewController(vc, animated: true)        }
     }
     
     func addComponents() {

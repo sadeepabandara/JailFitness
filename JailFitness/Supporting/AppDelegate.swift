@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,10 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let ageViewController = AgeViewController()
-        window?.rootViewController = ageViewController
-        window?.makeKeyAndVisible()
+        
+        FirebaseApp.configure()
+        
         return true
     }
     // MARK: UISceneSession Lifecycle
