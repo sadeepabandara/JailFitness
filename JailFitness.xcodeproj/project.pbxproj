@@ -27,7 +27,6 @@
 		424C8F942A14D28F00E7FF66 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F932A14D28F00E7FF66 /* GoalViewController.swift */; };
 		424C8F962A15F1EA00E7FF66 /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F952A15F1EA00E7FF66 /* BMIViewController.swift */; };
 		424C8F982A16764300E7FF66 /* SingleExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F972A16764300E7FF66 /* SingleExerciseViewController.swift */; };
-		424C8FA02A17B4C600E7FF66 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424C8F9F2A17B4C600E7FF66 /* ChartView.swift */; };
 		424C8FA22A17D2FD00E7FF66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 424C8FA12A17D2FD00E7FF66 /* GoogleService-Info.plist */; };
 		4270805729E8926D00EC9583 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805629E8926D00EC9583 /* ScheduleViewController.swift */; };
 		4270805929E9A49D00EC9583 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4270805829E9A49D00EC9583 /* HomeViewController.swift */; };
@@ -63,7 +62,6 @@
 		424C8F932A14D28F00E7FF66 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		424C8F952A15F1EA00E7FF66 /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
 		424C8F972A16764300E7FF66 /* SingleExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleExerciseViewController.swift; sourceTree = "<group>"; };
-		424C8F9F2A17B4C600E7FF66 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		424C8FA12A17D2FD00E7FF66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4270805629E8926D00EC9583 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		4270805829E9A49D00EC9583 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +179,6 @@
 				4270805C29E9A4DD00EC9583 /* ProfileViewController.swift */,
 				424C8F862A13B94F00E7FF66 /* HomeTableViewCell.swift */,
 				424C8F972A16764300E7FF66 /* SingleExerciseViewController.swift */,
-				424C8F9F2A17B4C600E7FF66 /* ChartView.swift */,
 				42A60C3A2A18CE1600FB18DB /* TabBarViewController.swift */,
 				42A60C3E2A19224200FB18DB /* ScheduleTableViewCell.swift */,
 				42A60C402A1928C400FB18DB /* DayScheduleViewController.swift */,
@@ -300,7 +297,6 @@
 				424C8F942A14D28F00E7FF66 /* GoalViewController.swift in Sources */,
 				424C8F872A13B94F00E7FF66 /* HomeTableViewCell.swift in Sources */,
 				424C8F982A16764300E7FF66 /* SingleExerciseViewController.swift in Sources */,
-				424C8FA02A17B4C600E7FF66 /* ChartView.swift in Sources */,
 				4270805929E9A49D00EC9583 /* HomeViewController.swift in Sources */,
 				42940CFA29D0348A006384E6 /* LoginViewController.swift in Sources */,
 				4270805729E8926D00EC9583 /* ScheduleViewController.swift in Sources */,

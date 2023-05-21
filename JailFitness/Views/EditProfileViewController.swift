@@ -16,7 +16,7 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
     let coverImage : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "weightImage")
+        imageView.image = UIImage(named: "editProfileImage")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -177,10 +177,10 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
             coverImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             coverImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             coverImage.topAnchor.constraint(equalTo: view.topAnchor),
-            coverImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -700),
+            coverImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -600),
 
             ageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ageLabel.topAnchor.constraint(equalTo: coverImage.bottomAnchor, constant: 230),
+            ageLabel.topAnchor.constraint(equalTo: coverImage.bottomAnchor, constant: 130),
             
             ageTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             ageTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
