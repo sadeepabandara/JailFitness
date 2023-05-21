@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
     let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
     let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
+    let customOrange = UIColor(red: 249.0/255.0, green: 155.0/255.0, blue: 125.0/255.0, alpha: 1)
     
     let logLabel : UILabel = {
         let label = UILabel()
@@ -77,20 +78,22 @@ class LoginViewController: UIViewController {
         return view
     }()
     
-    let userLabel : UILabel = {
+    let emailLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Username"
+        label.text = "Email"
         label.textColor = .gray
         label.font = UIFont(name: "Poppins-Medium", size: 16)
         return label
     }()
     
-    let userText : UITextField = {
+    let emailText : UITextField = {
         let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = .emailAddress
         textField.borderStyle = .roundedRect
+        textField.textColor = .white
         textField.layer.shadowOpacity = 0.1
         textField.layer.shadowColor = UIColor.gray.cgColor
         textField.backgroundColor = customBlueLight
@@ -113,6 +116,8 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
+        textField.textColor = .white
+        textField.isSecureTextEntry = true
         textField.layer.shadowOpacity = 0.1
         textField.layer.shadowColor = UIColor.gray.cgColor
         textField.backgroundColor = customBlueLight
@@ -194,13 +199,17 @@ class LoginViewController: UIViewController {
         view.backgroundColor = customBlue
         
         navigationController?.navigationBar.tintColor = customYellow
+        
+        navigationItem.setHidesBackButton(true, animated: false)
 
         addComponents()
         setupConstraints()
         
         registerbtn.addTarget(self, action: #selector(goToRegister), for: .touchUpInside)
         
-        googleBtn.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
+        loginBtn.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
+        
+        googleBtn.addTarget(self, action: #selector(goToHome), for: .touchUpInside)
     }
     
     @objc func goToRegister() {
@@ -208,9 +217,123 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func goToHome() {
+        let tabBarVc = UITabBarController()
+        let vc1 = UINavigationController(rootViewController: HomeViewController())
+        let vc2 = UINavigationController(rootViewController: ScheduleViewController())
+        let vc3 = UINavigationController(rootViewController: ProgressViewController())
+        let vc4 = UINavigationController(rootViewController: ProfileViewController())
+        vc1.title = "Home"
+        vc2.title = "Schedule"
+        vc3.title = "Progress"
+        vc4.title = "Profile"
+        
+        tabBarVc.setViewControllers([vc1, vc2, vc3, vc4], animated: false)
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+            let blurView = UIVisualEffectView(effect: blurEffect)
+            blurView.frame = tabBarVc.tabBar.bounds
+            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            tabBarVc.tabBar.insertSubview(blurView, at: 0)
+        
+        guard let items = tabBarVc.tabBar.items else {
+            return
+        }
+        
+        let images = ["house.fill", "doc.plaintext.fill", "chart.bar.xaxis", "person.fill"]
+        
+        for x in 0..<items.count {
+            items[x].image = UIImage(systemName: images[x])
+            items[x].badgeColor = UIColor.white
+        }
+        
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.tintColor = customYellow
+        tabBarAppearance.unselectedItemTintColor = .white
+        
+        tabBarVc.modalPresentationStyle = .fullScreen
+        present(tabBarVc, animated: true)
+    }
+    
     @objc func goToNext() {
-        let vc = GenderViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        errorLabel?.removeFromSuperview()
+        let email = emailText.text ?? ""
+        let password = passwordText.text ?? ""
+        
+        if isValidEmail(email) && isValidPassword(password) {
+            let tabBarVc = UITabBarController()
+            let vc1 = UINavigationController(rootViewController: HomeViewController())
+            let vc2 = UINavigationController(rootViewController: ScheduleViewController())
+            let vc3 = UINavigationController(rootViewController: ProgressViewController())
+            let vc4 = UINavigationController(rootViewController: ProfileViewController())
+            vc1.title = "Home"
+            vc2.title = "Schedule"
+            vc3.title = "Progress"
+            vc4.title = "Profile"
+            
+            tabBarVc.setViewControllers([vc1, vc2, vc3, vc4], animated: false)
+            
+            let blurEffect = UIBlurEffect(style: .dark)
+                let blurView = UIVisualEffectView(effect: blurEffect)
+                blurView.frame = tabBarVc.tabBar.bounds
+                blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+                tabBarVc.tabBar.insertSubview(blurView, at: 0)
+            
+            guard let items = tabBarVc.tabBar.items else {
+                return
+            }
+            
+            let images = ["house.fill", "doc.plaintext.fill", "chart.bar.xaxis", "person.fill"]
+            
+            for x in 0..<items.count {
+                items[x].image = UIImage(systemName: images[x])
+                items[x].badgeColor = UIColor.white
+            }
+            
+            let tabBarAppearance = UITabBar.appearance()
+            tabBarAppearance.tintColor = customYellow
+            tabBarAppearance.unselectedItemTintColor = .white
+            
+            tabBarVc.modalPresentationStyle = .fullScreen
+            present(tabBarVc, animated: true)
+        } else {
+            displayErrorMessage("Enter a valid email and password")
+        }
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+
+    func isValidPassword(_ password: String) -> Bool {
+        return password.count >= 8
+    }
+    
+    var errorLabel: UILabel?
+    
+    func displayErrorMessage(_ message: String) {
+        errorLabel?.removeFromSuperview()
+        
+        let errorLabel = UILabel()
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.font = UIFont(name: "Poppins-Medium", size: 16)
+        errorLabel.textColor = customOrange
+        errorLabel.textAlignment = .center
+        errorLabel.text = message
+        
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            errorLabel.topAnchor.constraint(equalTo: forgotButton.bottomAnchor, constant: 10)
+        ])
+        
+        self.errorLabel = errorLabel
     }
     
     func addComponents() {
@@ -224,8 +347,8 @@ class LoginViewController: UIViewController {
         mainView2.addSubview(hStack2)
         view.addSubview(mainView2)
         
-        view.addSubview(userLabel)
-        view.addSubview(userText)
+        view.addSubview(emailLabel)
+        view.addSubview(emailText)
         view.addSubview(passwordLabel)
         view.addSubview(passwordText)
         
@@ -265,18 +388,18 @@ class LoginViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            userLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            userLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            userLabel.topAnchor.constraint(equalTo: mainView2.bottomAnchor, constant: 20),
+            emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emailLabel.topAnchor.constraint(equalTo: mainView2.bottomAnchor, constant: 20),
             
-            userText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            userText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            userText.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 10),
-            userText.heightAnchor.constraint(equalToConstant: 40),
+            emailText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emailText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emailText.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 10),
+            emailText.heightAnchor.constraint(equalToConstant: 40),
             
             passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             passwordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            passwordLabel.topAnchor.constraint(equalTo: userText.bottomAnchor, constant: 20),
+            passwordLabel.topAnchor.constraint(equalTo: emailText.bottomAnchor, constant: 20),
             
             passwordText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             passwordText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),

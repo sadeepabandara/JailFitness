@@ -120,11 +120,11 @@ class BMIViewController: UIViewController {
     
     @objc func goToTabBar() {
         let tabBarVc = UITabBarController()
-        let vc1 = UINavigationController(rootViewController: MyPlanViewController())
+        let vc1 = UINavigationController(rootViewController: HomeViewController())
         let vc2 = UINavigationController(rootViewController: ScheduleViewController())
         let vc3 = UINavigationController(rootViewController: ProgressViewController())
         let vc4 = UINavigationController(rootViewController: ProfileViewController())
-        vc1.title = "My Plan"
+        vc1.title = "Home"
         vc2.title = "Schedule"
         vc3.title = "Progress"
         vc4.title = "Profile"
@@ -142,7 +142,7 @@ class BMIViewController: UIViewController {
             return
         }
         
-        let images = ["dumbbell.fill", "doc.plaintext.fill", "chart.bar.xaxis", "person.fill"]
+        let images = ["house.fill", "doc.plaintext.fill", "chart.bar.xaxis", "person.fill"]
         
         for x in 0..<items.count {
             items[x].image = UIImage(systemName: images[x])

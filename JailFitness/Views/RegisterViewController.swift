@@ -12,6 +12,7 @@ class RegisterViewController: UIViewController {
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
     let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
     let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
+    let customOrange = UIColor(red: 249.0/255.0, green: 155.0/255.0, blue: 125.0/255.0, alpha: 1)
     
     let registerLabel : UILabel = {
         let label = UILabel()
@@ -77,19 +78,21 @@ class RegisterViewController: UIViewController {
         return view
     }()
     
-    let userLabel : UILabel = {
+    let emailLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Username"
+        label.text = "Email"
         label.textColor = .gray
         label.font = UIFont(name: "Poppins-Medium", size: 16)
         return label
     }()
     
-    let userText : UITextField = {
+    let emailText : UITextField = {
         let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = .emailAddress
+        textField.textColor = .white
         textField.borderStyle = .roundedRect
         textField.layer.shadowOpacity = 0.1
         textField.layer.shadowColor = UIColor.gray.cgColor
@@ -113,6 +116,8 @@ class RegisterViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
+        textField.textColor = .white
+        textField.isSecureTextEntry = true
         textField.layer.shadowOpacity = 0.1
         textField.layer.shadowColor = UIColor.gray.cgColor
         textField.backgroundColor = customBlueLight
@@ -121,27 +126,27 @@ class RegisterViewController: UIViewController {
         return textField
     }()
     
-    let confirmPasswordLabel : UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Confirm Password"
-        label.textColor = .gray
-        label.font = UIFont(name: "Poppins-Medium", size: 16)
-        return label
-    }()
-    
-    let confirmPasswordText : UITextField = {
-        let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
-        textField.layer.shadowOpacity = 0.1
-        textField.layer.shadowColor = UIColor.gray.cgColor
-        textField.layer.shadowRadius = 1
-        textField.backgroundColor = customBlueLight
-        textField.keyboardType = .default
-        return textField
-    }()
+//    let confirmPasswordLabel : UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "Confirm Password"
+//        label.textColor = .gray
+//        label.font = UIFont(name: "Poppins-Medium", size: 16)
+//        return label
+//    }()
+//
+//    let confirmPasswordText : UITextField = {
+//        let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
+//        let textField = UITextField()
+//        textField.translatesAutoresizingMaskIntoConstraints = false
+//        textField.borderStyle = .roundedRect
+//        textField.layer.shadowOpacity = 0.1
+//        textField.layer.shadowColor = UIColor.gray.cgColor
+//        textField.layer.shadowRadius = 1
+//        textField.backgroundColor = customBlueLight
+//        textField.keyboardType = .default
+//        return textField
+//    }()
     
     let checkBox : UISwitch = {
         let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
@@ -183,6 +188,7 @@ class RegisterViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.backgroundColor = customYellow
         button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+//        button.isEnabled = false
         return button
     }()
     
@@ -209,9 +215,19 @@ class RegisterViewController: UIViewController {
         addComponents()
         setupConstraints()
         
+        navigationItem.setHidesBackButton(true, animated: false)
+        
         loginbtn.addTarget(self, action: #selector(goToLogin), for: .touchUpInside)
         
-        googleBtn.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
+        registerBtn.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
+        
+        googleBtn.addTarget(self, action: #selector(goToGender), for: .touchUpInside)
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+    }
+
+    @objc func didTapToDismiss() {
+        view.endEditing(true)
     }
     
     @objc func goToLogin() {
@@ -219,9 +235,55 @@ class RegisterViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func goToNext() {
+    @objc func goToGender() {
         let vc = GenderViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func goToNext() {
+        errorLabel?.removeFromSuperview()
+        let email = emailText.text ?? ""
+        let password = passwordText.text ?? ""
+        
+        if isValidEmail(email) && isValidPassword(password) {
+            let vc = GenderViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            displayErrorMessage("Enter a valid email and password")
+        }
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+
+    func isValidPassword(_ password: String) -> Bool {
+        return password.count >= 8
+    }
+    
+    var errorLabel: UILabel?
+    
+    func displayErrorMessage(_ message: String) {
+        errorLabel?.removeFromSuperview()
+        
+        let errorLabel = UILabel()
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.font = UIFont(name: "Poppins-Medium", size: 16)
+        errorLabel.textColor = customOrange
+        errorLabel.textAlignment = .center
+        errorLabel.text = message
+        
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            errorLabel.topAnchor.constraint(equalTo: googleBtn.bottomAnchor, constant: 10)
+        ])
+        
+        self.errorLabel = errorLabel
     }
     
     func addComponents() {
@@ -235,12 +297,12 @@ class RegisterViewController: UIViewController {
         mainView2.addSubview(hStack2)
         view.addSubview(mainView2)
         
-        view.addSubview(userLabel)
-        view.addSubview(userText)
+        view.addSubview(emailLabel)
+        view.addSubview(emailText)
         view.addSubview(passwordLabel)
         view.addSubview(passwordText)
-        view.addSubview(confirmPasswordLabel)
-        view.addSubview(confirmPasswordText)
+//        view.addSubview(confirmPasswordLabel)
+//        view.addSubview(confirmPasswordText)
         
         hStack3.addArrangedSubview(checkBox)
         hStack3.addArrangedSubview(rememberLabel)
@@ -277,32 +339,32 @@ class RegisterViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            userLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            userLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            userLabel.topAnchor.constraint(equalTo: mainView2.bottomAnchor, constant: 20),
+            emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emailLabel.topAnchor.constraint(equalTo: mainView2.bottomAnchor, constant: 20),
             
-            userText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            userText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            userText.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 10),
-            userText.heightAnchor.constraint(equalToConstant: 40),
+            emailText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emailText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emailText.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 10),
+            emailText.heightAnchor.constraint(equalToConstant: 40),
             
             passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             passwordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            passwordLabel.topAnchor.constraint(equalTo: userText.bottomAnchor, constant: 20),
+            passwordLabel.topAnchor.constraint(equalTo: emailText.bottomAnchor, constant: 20),
             
             passwordText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             passwordText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             passwordText.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 10),
             passwordText.heightAnchor.constraint(equalToConstant: 40),
             
-            confirmPasswordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            confirmPasswordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            confirmPasswordLabel.topAnchor.constraint(equalTo: passwordText.bottomAnchor, constant: 20),
-            
-            confirmPasswordText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            confirmPasswordText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            confirmPasswordText.topAnchor.constraint(equalTo: confirmPasswordLabel.bottomAnchor, constant: 10),
-            confirmPasswordText.heightAnchor.constraint(equalToConstant: 40)
+//            confirmPasswordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            confirmPasswordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            confirmPasswordLabel.topAnchor.constraint(equalTo: passwordText.bottomAnchor, constant: 20),
+//
+//            confirmPasswordText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            confirmPasswordText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            confirmPasswordText.topAnchor.constraint(equalTo: confirmPasswordLabel.bottomAnchor, constant: 10),
+//            confirmPasswordText.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
@@ -315,7 +377,7 @@ class RegisterViewController: UIViewController {
             
             mainView3.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             mainView3.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            mainView3.topAnchor.constraint(equalTo: confirmPasswordText.bottomAnchor, constant: 20)
+            mainView3.topAnchor.constraint(equalTo: passwordText.bottomAnchor, constant: 20)
         ])
         
         NSLayoutConstraint.activate([

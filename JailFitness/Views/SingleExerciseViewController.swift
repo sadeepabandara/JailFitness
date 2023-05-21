@@ -108,6 +108,8 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
         return counts
     }()
+    
+    var videoId: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,7 +182,7 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         weightTextField.inputAccessoryView = toolbar
         
         configureWebView()
-        loadYouTubeVideo(videoId: "yTWO2th-RIY")
+        loadYouTubeVideo(videoId: videoId)
         
         addComponents()
         setupConstraints()

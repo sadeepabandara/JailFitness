@@ -6,13 +6,24 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseCore
+import FirebaseFirestore
 
-class MyPlanViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
     let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
     let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
+    
+    let db = Firestore.firestore()
+        
+        var dataArray: [[String: Any]] = []
+        var nameDA: [String] = []
+        var descriptionDA: [String] = []
+        var imageDA: [String] = []
+        var videoDA: [String] = []
+        
+    var dayOfWeek: String = "Monday"
     
     let profileImage : UIImageView = {
         let imageView = UIImageView()
@@ -77,7 +88,7 @@ class MyPlanViewController: UIViewController {
         UIImage(named: "dumbellCurl")!,
         UIImage(named: "barbellCurl")!,
         UIImage(named: "squat")!,
-        UIImage(named: "cableCrossOver")!,
+        UIImage(named: "cableCrossover")!,
         UIImage(named: "oneArmRow")!,
     ]
     
@@ -106,14 +117,19 @@ class MyPlanViewController: UIViewController {
         addComponents()
         setupConstraints()
         
+        chooseTheExerciseList()
+        
+        navigationItem.setHidesBackButton(true, animated: false)
+        
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if Auth.auth().currentUser == nil {
-            let vc = ViewController()
-            navigationController?.pushViewController(vc, animated: true)        }
+        
+        let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE"
+                
+            let currentDate = Date()
+            dayOfWeek = dateFormatter.string(from: currentDate)
+//        labelTitleTwo.text = "It's \(dayOfWeek)"
     }
     
     func addComponents() {
@@ -162,32 +178,100 @@ class MyPlanViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    func chooseTheExerciseList(){
+        if(self.dayOfWeek == "Monday"){readDocument(pathStr: "/workouts/lose_weight/mon")}
+        else if(self.dayOfWeek == "Tuesday"){readDocument(pathStr: "/workouts/lose_weight/tue")}
+        else if(self.dayOfWeek == "Wednesday"){ readDocument(pathStr: "/workouts/lose_weight/wed")}
+        else if(self.dayOfWeek == "Thursday"){readDocument(pathStr: "/workouts/lose_weight/thu")}
+        else if(self.dayOfWeek == "Friday"){readDocument(pathStr: "/workouts/lose_weight/fri")}
+        else if(self.dayOfWeek == "Saturday"){readDocument(pathStr: "/workouts/lose_weight/sat")}
+        else if(self.dayOfWeek == "Sunday"){readDocument(pathStr: "/workouts/lose_weight/sun")}
+        else{readDocument(pathStr: "/exercises/lose_weight/mon")}
+    }
+    
+    func readDocument(pathStr:String){
+            
+            db.collection(pathStr).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        self.dataArray.append(data)
+                    }
+                    
+                    self.saveNameArray()
+                    self.saveDescriptionArray()
+                    self.saveImageArray()
+                    self.saveVideoIdArray()
+                    
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        func saveNameArray() {
+            for data in dataArray {
+                self.nameDA.append(data["name"] as! String)
+            }
+        }
+        
+        func saveDescriptionArray() {
+            for data in dataArray {
+                self.descriptionDA.append(data["description"] as! String)
+            }
+        }
+        
+        func saveImageArray() {
+            for data in dataArray {
+                self.imageDA.append(data["image"] as! String)
+            }
+        }
+        
+        func saveVideoIdArray() {
+            for data in dataArray {
+                self.videoDA.append(data["videoId"] as! String)
+            }
+        }
 }
 
-extension MyPlanViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return images.count
+        return nameDA.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPlanTableViewCell.identifier, for: indexPath) as? MyPlanTableViewCell else {
             fatalError("The tableView could not dequeue a MyPlanTableViewCell in MyPlanViewController")
         }
-        let image = images[indexPath.row]
-        let desc = desc[indexPath.row]
         
-        
-        cell.configure(with: image, and: desc)
+        let image = self.imageDA[indexPath.row]
+        let picture = UIImage(named: image)
+        let label = self.nameDA[indexPath.row]
+        cell.configure(with: picture!, and: label)
         cell.contentView.backgroundColor = customBlueLight
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goToNext()
+        let nameData = nameDA[indexPath.row]
+        let descriptionData = descriptionDA[indexPath.row]
+        let videoIdData = videoDA[indexPath.row]
+                
+        print(nameData,":",descriptionData,":",videoIdData)
+                
+        getNext(name: nameData, description: descriptionData, videoId: videoIdData)
     }
     
-    @objc func goToNext() {
+    @objc func getNext(name:String,description:String,videoId:String) {
         let vc = SingleExerciseViewController()
+        vc.exerciseLabel.text = name
+        vc.descLabel.text = description
+        vc.videoId = videoId
+            
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+  
 }

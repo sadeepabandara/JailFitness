@@ -330,12 +330,108 @@ class ProfileViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    let popupView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        return view
+    }()
+        
+    let popupLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Poppins-SemiBold", size: 18)
+        label.text = "Are you sure?"
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
+        
+    let yesButton: UIButton = {
+        let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
+        let label = UILabel()
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        button.setTitle("Yes", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = customYellow
+        button.layer.cornerRadius = 8
+        return button
+    }()
+        
+    let noButton: UIButton = {
+        let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        button.setTitle("No", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = customBlueLight
+        button.layer.cornerRadius = 8
+        return button
+    }()
+    
+    @objc func showPopup() {
+        let popupHeight: CGFloat = 200
+        let popupWidth: CGFloat = 280
+            
+        view.addSubview(popupView)
+        NSLayoutConstraint.activate([
+            popupView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            popupView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            popupView.widthAnchor.constraint(equalToConstant: popupWidth),
+            popupView.heightAnchor.constraint(equalToConstant: popupHeight)
+        ])
+            
+        popupView.addSubview(popupLabel)
+        popupView.addSubview(yesButton)
+        popupView.addSubview(noButton)
+            
+        NSLayoutConstraint.activate([
+            popupLabel.topAnchor.constraint(equalTo: popupView.topAnchor, constant: 20),
+            popupLabel.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 20),
+            popupLabel.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -20)
+        ])
+            
+        NSLayoutConstraint.activate([
+            yesButton.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -20),
+            yesButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -20),
+            yesButton.widthAnchor.constraint(equalToConstant: 80),
+            yesButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+            
+        NSLayoutConstraint.activate([
+            noButton.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -20),
+            noButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 20),
+            noButton.widthAnchor.constraint(equalToConstant: 80),
+            noButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+            
+        yesButton.addTarget(self, action: #selector(goToLogin), for: .touchUpInside)
+        noButton.addTarget(self, action: #selector(dismissPopup), for: .touchUpInside)
+    }
+        
+    @objc func dismissPopup() {
+        popupView.removeFromSuperview()
+    }
+        
+    @objc func goToLogin() {
+        let vc = LoginViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        vc.hidesBottomBarWhenPushed = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = customBlue
         let textColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         UINavigationBar.appearance().titleTextAttributes = textColor
+        
+        nextBtn4.addTarget(self, action: #selector(showPopup), for: .touchUpInside)
+
         
         addComponents()
         setupConstraints()
