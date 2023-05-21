@@ -15,19 +15,23 @@ class ProgressViewController: UIViewController {
 
     private var chartView: ChartView!
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
             
-            view.backgroundColor = customBlue
+        view.backgroundColor = customBlue
             
-            setupChartView()
-        }
+        setupChartView()
+    }
+    
+    func addComponents() {
+        view.addSubview(chartView)
+    }
         
-        private func setupChartView() {
-            chartView = ChartView(frame: CGRect(x: 0, y: 100, width: 400, height: 200))
-            view.addSubview(chartView)
+    func setupChartView() {
+        chartView = ChartView(frame: CGRect(x: 0, y: 700, width: 400, height: 200))
+        chartView.backgroundColor = customBlueLight
             
-            let data: [CGFloat] = [75, 54, 73, 72, 73, 72, 71]
-            chartView.updateChart(with: data)
-        }
+        let data: [CGFloat] = [74, 69, 65, 61, 63, 68, 60]
+        chartView.updateChart(with: data)
+    }
 }

@@ -335,10 +335,10 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @objc func startButtonTapped() {
         if let setsTextField = setsTextField.text, setsTextField.isEmpty {
-            displayErrorMessage("Missing weight - Please enter your sets count")
+            displayErrorMessage("Missing sets - Please enter your sets count")
         } else if let repsTextField = repsTextField.text,
             repsTextField.isEmpty {
-            displayErrorMessage("Missing weight - Please enter your reps count")
+            displayErrorMessage("Missing reps - Please enter your reps count")
         } else if let weightTextField = weightTextField.text, weightTextField.isEmpty {
             displayErrorMessage("Missing weight - Please enter your weight size")
         } else {

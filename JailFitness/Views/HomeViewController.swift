@@ -105,7 +105,7 @@ class HomeViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
         tableView.allowsSelection = true
-        tableView.register(MyPlanTableViewCell.self, forCellReuseIdentifier: MyPlanTableViewCell.identifier)
+        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
         tableView.separatorColor = UIColor.gray
         return tableView
     }()
@@ -242,7 +242,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPlanTableViewCell.identifier, for: indexPath) as? MyPlanTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as? HomeTableViewCell else {
             fatalError("The tableView could not dequeue a MyPlanTableViewCell in MyPlanViewController")
         }
         

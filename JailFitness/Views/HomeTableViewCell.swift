@@ -7,11 +7,11 @@
 
 import UIKit
 
-class MyPlanTableViewCell: UITableViewCell {
+class HomeTableViewCell: UITableViewCell {
 
-    static let identifier = "MyPlanTableViewCell"
+    static let identifier = "HomeTableViewCell"
     
-    let myPlanImageView: UIImageView = {
+    let homeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -20,7 +20,7 @@ class MyPlanTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    let myPlanLabel: UILabel = {
+    let homeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
@@ -42,27 +42,27 @@ class MyPlanTableViewCell: UITableViewCell {
     }
     
     func configure(with image: UIImage, and label: String) {
-        myPlanImageView.image = image
-        myPlanLabel.text = label
+        homeImageView.image = image
+        homeLabel.text = label
     }
     
     func addComponents() {
-        contentView.addSubview(myPlanImageView)
-        contentView.addSubview(myPlanLabel)
+        contentView.addSubview(homeImageView)
+        contentView.addSubview(homeLabel)
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            myPlanImageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            myPlanImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            myPlanImageView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
-            myPlanImageView.heightAnchor.constraint(equalToConstant: 120),
-            myPlanImageView.widthAnchor.constraint(equalToConstant: 90),
+            homeImageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            homeImageView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            homeImageView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            homeImageView.heightAnchor.constraint(equalToConstant: 120),
+            homeImageView.widthAnchor.constraint(equalToConstant: 90),
             
-            myPlanLabel.leadingAnchor.constraint(equalTo: myPlanImageView.trailingAnchor, constant: 20),
-            myPlanLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            myPlanLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            myPlanLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            homeLabel.leadingAnchor.constraint(equalTo: homeImageView.trailingAnchor, constant: 20),
+            homeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            homeLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            homeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
     

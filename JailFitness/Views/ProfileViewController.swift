@@ -420,8 +420,14 @@ class ProfileViewController: UIViewController {
         
     @objc func goToLogin() {
         let vc = LoginViewController()
-        navigationController?.pushViewController(vc, animated: true)
         vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+        popupView.removeFromSuperview()
+    }
+    
+    @objc func goToEdit() {
+        let vc = EditProfileViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     override func viewDidLoad() {
@@ -430,11 +436,17 @@ class ProfileViewController: UIViewController {
         let textColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         UINavigationBar.appearance().titleTextAttributes = textColor
         
-        nextBtn4.addTarget(self, action: #selector(showPopup), for: .touchUpInside)
+        navigationItem.setHidesBackButton(true, animated: false)
+        
+        
 
         
         addComponents()
         setupConstraints()
+        
+        nextBtn.addTarget(self, action: #selector(goToEdit), for: .touchUpInside)
+        
+        nextBtn4.addTarget(self, action: #selector(showPopup), for: .touchUpInside)
     }
     
     func addComponents() {
@@ -637,3 +649,4 @@ class ProfileViewController: UIViewController {
         ])
     }
 }
+
