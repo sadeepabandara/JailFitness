@@ -51,7 +51,6 @@
 		42940CFC29D03B7B006384E6 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42940CFB29D03B7B006384E6 /* Poppins-Medium.ttf */; };
 		42940D0029D6C069006384E6 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42940CFF29D6C069006384E6 /* ExerciseViewController.swift */; };
 		42A60C3B2A18CE1600FB18DB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A60C3A2A18CE1600FB18DB /* TabBarViewController.swift */; };
-		42A60C3D2A190D5B00FB18DB /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A60C3C2A190D5B00FB18DB /* PopupViewController.swift */; };
 		42A60C3F2A19224200FB18DB /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A60C3E2A19224200FB18DB /* ScheduleTableViewCell.swift */; };
 		42A60C412A1928C400FB18DB /* DayScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A60C402A1928C400FB18DB /* DayScheduleViewController.swift */; };
 /* End PBXBuildFile section */
@@ -92,7 +91,6 @@
 		42940CFB29D03B7B006384E6 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		42940CFF29D6C069006384E6 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		42A60C3A2A18CE1600FB18DB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		42A60C3C2A190D5B00FB18DB /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		42A60C3E2A19224200FB18DB /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		42A60C402A1928C400FB18DB /* DayScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayScheduleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +120,10 @@
 		424C8F882A13E11200E7FF66 /* Starter Views */ = {
 			isa = PBXGroup;
 			children = (
+				42940CE629CBF51C006384E6 /* SecondViewController.swift */,
+				42940CD629C8AB29006384E6 /* ViewController.swift */,
+				42940CF929D0348A006384E6 /* LoginViewController.swift */,
+				42940CED29CF4DE0006384E6 /* RegisterViewController.swift */,
 				424C8F892A13E76100E7FF66 /* GenderViewController.swift */,
 				424C8F8B2A148AF300E7FF66 /* AgeViewController.swift */,
 				424C8F8D2A1496C600E7FF66 /* HeightViewController.swift */,
@@ -177,10 +179,6 @@
 		42940CFD29D34E8A006384E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				42940CD629C8AB29006384E6 /* ViewController.swift */,
-				42940CE629CBF51C006384E6 /* SecondViewController.swift */,
-				42940CED29CF4DE0006384E6 /* RegisterViewController.swift */,
-				42940CF929D0348A006384E6 /* LoginViewController.swift */,
 				42940CFF29D6C069006384E6 /* ExerciseViewController.swift */,
 				424CE1C129D9D0310064BE4E /* ExerciseTableViewCell.swift */,
 				4270805429E88B6200EC9583 /* AddExercisesViewController.swift */,
@@ -192,7 +190,6 @@
 				424C8F972A16764300E7FF66 /* SingleExerciseViewController.swift */,
 				424C8F9F2A17B4C600E7FF66 /* ChartView.swift */,
 				42A60C3A2A18CE1600FB18DB /* TabBarViewController.swift */,
-				42A60C3C2A190D5B00FB18DB /* PopupViewController.swift */,
 				42A60C3E2A19224200FB18DB /* ScheduleTableViewCell.swift */,
 				42A60C402A1928C400FB18DB /* DayScheduleViewController.swift */,
 			);
@@ -328,7 +325,6 @@
 				42940CD729C8AB29006384E6 /* ViewController.swift in Sources */,
 				42A60C3F2A19224200FB18DB /* ScheduleTableViewCell.swift in Sources */,
 				42940CD329C8AB29006384E6 /* AppDelegate.swift in Sources */,
-				42A60C3D2A190D5B00FB18DB /* PopupViewController.swift in Sources */,
 				424C8F8C2A148AF300E7FF66 /* AgeViewController.swift in Sources */,
 				42940CD529C8AB29006384E6 /* SceneDelegate.swift in Sources */,
 			);
