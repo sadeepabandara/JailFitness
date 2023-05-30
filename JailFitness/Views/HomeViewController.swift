@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseCore
 import FirebaseFirestore
 
 class HomeViewController: UIViewController {
+    
+    var email: String = ""
     
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
     let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
@@ -24,6 +27,7 @@ class HomeViewController: UIViewController {
         var videoDA: [String] = []
         
     var dayOfWeek: String = "Monday"
+    var userBMI = "lose_weight"
     
     let profileImage : UIImageView = {
         let imageView = UIImageView()
@@ -49,7 +53,7 @@ class HomeViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Poppins-SemiBold", size: 16)
-        label.text = "Sadeepa Bandara"
+        label.text = "sadeepa@gmail.com"
         label.textColor = .white
         return label
     }()
@@ -117,7 +121,7 @@ class HomeViewController: UIViewController {
         addComponents()
         setupConstraints()
         
-        chooseTheExerciseList()
+        getUserDataFirebase()
         
         navigationItem.setHidesBackButton(true, animated: false)
         
@@ -125,11 +129,46 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         
         let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEEE"
+        dateFormatter.dateFormat = "EEEE"
                 
-            let currentDate = Date()
-            dayOfWeek = dateFormatter.string(from: currentDate)
+        let currentDate = Date()
+        dayOfWeek = dateFormatter.string(from: currentDate)
 //        labelTitleTwo.text = "It's \(dayOfWeek)"
+    }
+    
+    @objc func getNext(name:String,description:String,videoId:String) {
+        let vc = SingleExerciseViewController()
+        vc.exerciseLabel.text = name
+        vc.descLabel.text = description
+        vc.videoId = videoId
+            
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleAuthentication() {
+        if Auth.auth().currentUser == nil {
+            let vc = UINavigationController(rootViewController: ViewController())
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: false)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        handleAuthentication()
+    }
+    
+    var tabBarHeight: CGFloat = 0.0
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+            
+        if #available(iOS 11.0, *) {
+            // Adjust the top anchor of the mainView to account for the tabBar height
+            mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -tabBarHeight).isActive = true
+        } else {
+            // Adjust the top anchor of the mainView to account for the tabBar height
+            mainView.topAnchor.constraint(equalTo: view.topAnchor, constant: -tabBarHeight).isActive = true
+        }
     }
     
     func addComponents() {
@@ -179,61 +218,126 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func chooseTheExerciseList(){
-        if(self.dayOfWeek == "Monday"){readDocument(pathStr: "/workouts/lose_weight/mon")}
-        else if(self.dayOfWeek == "Tuesday"){readDocument(pathStr: "/workouts/lose_weight/tue")}
-        else if(self.dayOfWeek == "Wednesday"){ readDocument(pathStr: "/workouts/lose_weight/wed")}
-        else if(self.dayOfWeek == "Thursday"){readDocument(pathStr: "/workouts/lose_weight/thu")}
-        else if(self.dayOfWeek == "Friday"){readDocument(pathStr: "/workouts/lose_weight/fri")}
-        else if(self.dayOfWeek == "Saturday"){readDocument(pathStr: "/workouts/lose_weight/sat")}
-        else if(self.dayOfWeek == "Sunday"){readDocument(pathStr: "/workouts/lose_weight/sun")}
-        else{readDocument(pathStr: "/exercises/lose_weight/mon")}
+    func chooseTheWorkoutList(){
+        let workouts = "/workouts/"
+        
+        if(self.dayOfWeek == "Monday"){
+            let day = "/mon"
+            let pathStr = workouts + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Tuesday"){
+            let day = "/tue"
+            let pathStr = workouts + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Wednesday"){
+            let day = "/wed"
+            let pathStr = workouts + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Thursday"){
+            let day = "/thu"
+            let pathStr = workouts + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Friday"){
+            let day = "/fri"
+            let pathStr = workouts + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Saturday"){
+            let day = "/sat"
+            let pathStr = workouts + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Sunday"){
+            let day = "/sun"
+            let pathStr = workouts + self.userBMI + day
+            print(pathStr)
+            readDocument(pathStr: pathStr)
+        }
+        else{readDocument(pathStr: "/workouts/lose_weight/mon")}
     }
     
     func readDocument(pathStr:String){
             
-            db.collection(pathStr).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                        self.dataArray.append(data)
-                    }
+        db.collection(pathStr).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    self.dataArray.append(data)
+            }
                     
-                    self.saveNameArray()
-                    self.saveDescriptionArray()
-                    self.saveImageArray()
-                    self.saveVideoIdArray()
-                    
-                    self.tableView.reloadData()
-                }
+            self.saveNameArray()
+            self.saveDescriptionArray()
+            self.saveImageArray()
+            self.saveVideoIdArray()
+            
+            self.tableView.reloadData()
             }
         }
+    }
         
-        func saveNameArray() {
-            for data in dataArray {
-                self.nameDA.append(data["name"] as! String)
-            }
+    func saveNameArray() {
+        for data in dataArray {
+            self.nameDA.append(data["name"] as! String)
         }
+    }
         
-        func saveDescriptionArray() {
-            for data in dataArray {
-                self.descriptionDA.append(data["description"] as! String)
-            }
+    func saveDescriptionArray() {
+        for data in dataArray {
+            self.descriptionDA.append(data["description"] as! String)
         }
+    }
         
-        func saveImageArray() {
-            for data in dataArray {
-                self.imageDA.append(data["image"] as! String)
-            }
+    func saveImageArray() {
+        for data in dataArray {
+            self.imageDA.append(data["image"] as! String)
         }
+    }
         
-        func saveVideoIdArray() {
-            for data in dataArray {
-                self.videoDA.append(data["videoId"] as! String)
+    func saveVideoIdArray() {
+        for data in dataArray {
+            self.videoDA.append(data["videoId"] as! String)
+        }
+    }
+    
+    func getUserDataFirebase() {
+            
+        let data = UserDefaults.standard
+
+        email = data.string(forKey: "Email")!
+
+        print(email)
+        
+        let userRef = db.collection("user_details")
+        let query = userRef.whereField("email", isEqualTo: email as Any)
+
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+        }
+
+        guard let documents = querySnapshot?.documents else {
+        print("No documents found")
+            return
+        }
+
+        if let userDocument = documents.first {
+            let bmi = userDocument.data()["bmi"] as? String ?? ""
+            self.userBMI = bmi
+            print("BMI Goal: \(self.userBMI)")
+            self.chooseTheWorkoutList()
+        }
+            else {
+                print("BMI Goal: No BMI")
             }
         }
+    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -263,15 +367,4 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
         getNext(name: nameData, description: descriptionData, videoId: videoIdData)
     }
-    
-    @objc func getNext(name:String,description:String,videoId:String) {
-        let vc = SingleExerciseViewController()
-        vc.exerciseLabel.text = name
-        vc.descLabel.text = description
-        vc.videoId = videoId
-            
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-  
 }

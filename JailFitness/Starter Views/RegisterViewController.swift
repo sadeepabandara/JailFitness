@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class RegisterViewController: UIViewController {
     
@@ -126,27 +127,27 @@ class RegisterViewController: UIViewController {
         return textField
     }()
     
-//    let confirmPasswordLabel : UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Confirm Password"
-//        label.textColor = .gray
-//        label.font = UIFont(name: "Poppins-Medium", size: 16)
-//        return label
-//    }()
-//
-//    let confirmPasswordText : UITextField = {
-//        let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
-//        let textField = UITextField()
-//        textField.translatesAutoresizingMaskIntoConstraints = false
-//        textField.borderStyle = .roundedRect
-//        textField.layer.shadowOpacity = 0.1
-//        textField.layer.shadowColor = UIColor.gray.cgColor
-//        textField.layer.shadowRadius = 1
-//        textField.backgroundColor = customBlueLight
-//        textField.keyboardType = .default
-//        return textField
-//    }()
+    //    let confirmPasswordLabel : UILabel = {
+    //        let label = UILabel()
+    //        label.translatesAutoresizingMaskIntoConstraints = false
+    //        label.text = "Confirm Password"
+    //        label.textColor = .gray
+    //        label.font = UIFont(name: "Poppins-Medium", size: 16)
+    //        return label
+    //    }()
+    //
+    //    let confirmPasswordText : UITextField = {
+    //        let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
+    //        let textField = UITextField()
+    //        textField.translatesAutoresizingMaskIntoConstraints = false
+    //        textField.borderStyle = .roundedRect
+    //        textField.layer.shadowOpacity = 0.1
+    //        textField.layer.shadowColor = UIColor.gray.cgColor
+    //        textField.layer.shadowRadius = 1
+    //        textField.backgroundColor = customBlueLight
+    //        textField.keyboardType = .default
+    //        return textField
+    //    }()
     
     let checkBox : UISwitch = {
         let customYellow = UIColor(red: 225.0/255.0, green: 254.0/255.0, blue: 17.0/255.0, alpha: 1)
@@ -188,7 +189,7 @@ class RegisterViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.backgroundColor = customYellow
         button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
-//        button.isEnabled = false
+        button.isEnabled = false
         return button
     }()
     
@@ -205,6 +206,49 @@ class RegisterViewController: UIViewController {
         button.setImage(UIImage(named: "googleIcon"), for: .normal)
         return button
     }()
+    
+    var viewModel = AuthenticationViewModel()
+    var subscriptions: Set<AnyCancellable> = []
+    
+    func bindViews() {
+        emailText.addTarget(self, action: #selector(didChangeEmailField), for: .editingChanged)
+        passwordText.addTarget(self, action: #selector(didChangePasswordField), for: .editingChanged)
+        viewModel.$isAuthenticationFormValid.sink { [weak self] validationState in
+            self?.registerBtn.isEnabled = validationState
+        }
+        .store(in: &subscriptions)
+        
+        viewModel.$user.sink { [weak self] user in
+            guard user != nil else { return }
+            let view = GenderViewController()
+            guard let vc = self?.navigationController?.pushViewController(view, animated: true) as? ViewController else { return }
+            vc.dismiss(animated: true)
+        }
+        .store(in: &subscriptions)
+        
+        viewModel.$error.sink { [weak self] errorString in
+            guard let error = errorString else { return }
+            self?.presentAlert(with: error)
+        }
+        .store(in: &subscriptions)
+    }
+    
+    func presentAlert(with error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        let okayButton = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(okayButton)
+        present(alert, animated: true)
+    }
+    
+    @objc func didChangeEmailField() {
+        viewModel.email = emailText.text
+        viewModel.validateRegistrationForm()
+    }
+    
+    @objc func didChangePasswordField() {
+        viewModel.password = passwordText.text
+        viewModel.validateRegistrationForm()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,15 +263,41 @@ class RegisterViewController: UIViewController {
         
         loginbtn.addTarget(self, action: #selector(goToLogin), for: .touchUpInside)
         
-        registerBtn.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
+        registerBtn.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
         
         googleBtn.addTarget(self, action: #selector(goToGender), for: .touchUpInside)
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        
+        bindViews()
     }
-
+    
+    @objc func didTapRegister() {
+        let data = UserDefaults.standard
+        let email = emailText.text
+        let password = passwordText.text
+        data.set(email, forKey: "Email")
+        data.set(password, forKey: "Password")
+        
+        viewModel.createUser()
+    }
+    
     @objc func didTapToDismiss() {
         view.endEditing(true)
+    }
+    
+    var tabBarHeight: CGFloat = 0.0
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+            
+            if #available(iOS 11.0, *) {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -tabBarHeight).isActive = true
+            } else {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                mainView.topAnchor.constraint(equalTo: view.topAnchor, constant: -tabBarHeight).isActive = true
+            }
     }
     
     @objc func goToLogin() {

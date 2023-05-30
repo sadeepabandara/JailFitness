@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class LoginViewController: UIViewController {
+    
+    var viewModel = AuthenticationViewModel()
+    var subscriptions: Set<AnyCancellable> = []
     
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
     let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
@@ -166,6 +170,7 @@ class LoginViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.backgroundColor = customYellow
         button.titleLabel?.font = UIFont(name: "Poppins-SemiBold", size: 16)
+        button.isEnabled = false
         return button
     }()
     
@@ -193,6 +198,45 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "Poppins-Medium", size: 16)
         return button
     }()
+    
+    func bindViews() {
+        emailText.addTarget(self, action: #selector(didChangeEmailField), for: .editingChanged)
+        passwordText.addTarget(self, action: #selector(didChangePasswordField), for: .editingChanged)
+        viewModel.$isAuthenticationFormValid.sink { [weak self] validationState in
+            self?.loginBtn.isEnabled = validationState
+        }
+        .store(in: &subscriptions)
+        
+        viewModel.$user.sink { [weak self] user in
+            guard user != nil else { return }
+            guard let vc = self?.navigationController?.viewControllers.first as? ViewController else { return }
+            vc.dismiss(animated: true)
+        }
+        .store(in: &subscriptions)
+        
+        viewModel.$error.sink { [weak self] errorString in
+            guard let error = errorString else { return }
+            self?.presentAlert(with: error)
+        }
+        .store(in: &subscriptions)
+    }
+    
+    func presentAlert(with error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        let okayButton = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(okayButton)
+        present(alert, animated: true)
+    }
+    
+    @objc func didChangeEmailField() {
+        viewModel.email = emailText.text
+        viewModel.validateRegistrationForm()
+    }
+    
+    @objc func didChangePasswordField() {
+        viewModel.password = passwordText.text
+        viewModel.validateRegistrationForm()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,9 +251,33 @@ class LoginViewController: UIViewController {
         
         registerbtn.addTarget(self, action: #selector(goToRegister), for: .touchUpInside)
         
-        loginBtn.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
+        loginBtn.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
         
         googleBtn.addTarget(self, action: #selector(goToHome), for: .touchUpInside)
+        
+        bindViews()
+    }
+    
+    @objc func didTapLogin() {
+        let data = UserDefaults.standard
+        let email = emailText.text
+        data.set(email, forKey: "Email")
+        
+        viewModel.loginUser()
+    }
+    
+    var tabBarHeight: CGFloat = 0.0
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+            
+            if #available(iOS 11.0, *) {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -tabBarHeight).isActive = true
+            } else {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                mainView.topAnchor.constraint(equalTo: view.topAnchor, constant: -tabBarHeight).isActive = true
+            }
     }
     
     @objc func goToRegister() {

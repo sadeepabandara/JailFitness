@@ -15,12 +15,20 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let homeVC = HomeViewController()
+            homeVC.tabBarHeight = tabBar.frame.height
+            let vc1 = UINavigationController(rootViewController: homeVC)
+        
+        let profileVC = ProfileViewController()
+            profileVC.tabBarHeight = tabBar.frame.height
+            let vc4 = UINavigationController(rootViewController: profileVC)
 
-        let vc1 = UINavigationController(rootViewController: HomeViewController())
+//        let vc1 = UINavigationController(rootViewController: HomeViewController())
         let vc2 = UINavigationController(rootViewController: ScheduleViewController())
         let vc3 = UINavigationController(rootViewController: ProgressViewController())
-        let vc4 = UINavigationController(rootViewController: ProfileViewController())
-        vc1.title = "My Plan"
+//        let vc4 = UINavigationController(rootViewController: ProfileViewController())
+        vc1.title = "Home"
         vc2.title = "Schedule"
         vc3.title = "Progress"
         vc4.title = "Profile"
@@ -33,6 +41,8 @@ class TabBarViewController: UITabBarController {
             blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         self.tabBar.insertSubview(blurView, at: 0)
+        
+        
         
         guard let items = self.tabBar.items else {
             return

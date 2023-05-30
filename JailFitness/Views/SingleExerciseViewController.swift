@@ -188,6 +188,20 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         setupConstraints()
     }
     
+    var tabBarHeight: CGFloat = 0.0
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+            
+            if #available(iOS 11.0, *) {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -tabBarHeight).isActive = true
+            } else {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                webView.topAnchor.constraint(equalTo: view.topAnchor, constant: -tabBarHeight).isActive = true
+            }
+    }
+    
     func addComponents() {
         view.addSubview(exerciseLabel)
         view.addSubview(descLabel)
@@ -434,7 +448,7 @@ class SingleExerciseViewController: UIViewController, UIPickerViewDelegate, UIPi
         view.addSubview(webView)
 
         NSLayoutConstraint.activate([
-            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -200),
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -290),
             webView.heightAnchor.constraint(equalToConstant: 395),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -5),
             webView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

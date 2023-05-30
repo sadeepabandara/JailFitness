@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class BMIViewController: UIViewController {
+    
+    let db = Firestore.firestore()
+        
+    var BMI = 1.2;
+    var bmiStr = ""
 
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
     let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
@@ -99,26 +105,79 @@ class BMIViewController: UIViewController {
         let weight = data.double(forKey: "Weight")
         let height = data.double(forKey: "Height")
         
-        print("Weight: ",weight, "Height: ", height)
+//        print("Weight: ",weight, "Height: ", height)
         
         let bmi = (weight / height / height) * 10000
         
-        if(bmi <= 18.5) {
+        let bmiDouble = Double(bmi)
+        
+        if(bmiDouble <= 18.5) {
             bmiLabel.text = "Underweight"
             goalLabel.text = "Gain Weight"
-        } else if (bmi >= 18.5 && bmi < 25) {
+            bmiStr = "gain_weight"
+        } else if (bmiDouble >= 18.5 && bmiDouble < 25) {
             bmiLabel.text = "Normal"
             goalLabel.text = "Gain Weight"
-        } else if (bmi >= 25 && bmi < 30) {
+            bmiStr = "gain_weight"
+        } else if (bmiDouble >= 25 && bmiDouble < 30) {
             bmiLabel.text = "Overweight"
             goalLabel.text = "Lose Weight"
+            bmiStr = "lose_weight"
         } else {
             bmiLabel.text = "Obesity"
             goalLabel.text = "Lose Weight"
+            bmiStr = "lose_weight"
+        }
+        
+        data.set(bmiStr, forKey: "bmi")
+    }
+    
+    func getDataFromUserDefaults(){
+        let data = UserDefaults.standard
+        
+        let email = data.string(forKey: "Email")!
+        let password = data.string(forKey: "Password")
+        let gender = data.string(forKey: "Gender")
+        let age = data.string(forKey: "Age")
+        let weight = data.string(forKey: "Weight")!
+        let height = data.string(forKey: "Height")
+        let experience = data.string(forKey: "Experience")
+        let goal = data.string(forKey: "Goal")
+            
+        saveData(email: email, password: password!, gender: gender!, age: age!, weight: weight, height: height!, experience: experience!, goal: goal!, bmiStr: bmiStr)
+    }
+        
+    func saveData(email:String,password:String,gender:String,age:String,weight:String,height:String,experience:String,goal:String,bmiStr:String){
+        let data: [String: Any] = [
+            "email": email,
+            "password" : password,
+            "gender" : gender,
+            "age" : age,
+            "weight" : weight,
+            "height" : height,
+            "experience" : experience,
+            "goal" : goal,
+            "bmi" : bmiStr
+        ]
+        
+        db.collection("/user_details").addDocument(data: data) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added")
+            }
         }
     }
     
     @objc func goToTabBar() {
+        print("Hi sadeepa")
+        getDataFromUserDefaults()
+        
+        tab()
+        
+    }
+    
+    func tab(){
         let tabBarVc = UITabBarController()
         let vc1 = UINavigationController(rootViewController: HomeViewController())
         let vc2 = UINavigationController(rootViewController: ScheduleViewController())

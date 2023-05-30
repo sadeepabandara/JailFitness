@@ -177,7 +177,11 @@ class AgeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         // Generate months
         let dateFormatter = DateFormatter()
-        months = dateFormatter.monthSymbols ?? []
+        let enMonthSymbols = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ]
+        months = enMonthSymbols
         
         // Generate days (1 to 31)
         for day in 1...31 {

@@ -6,8 +6,17 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
+    
+    let db = Firestore.firestore()
+        
+    var name:String = "Sadeepa Bandara"
+    var age:String = "22"
+    var weight:String = "74"
+    var height:String = "183"
     
     let customBlue = UIColor(red: 28.0/255.0, green: 34.0/255.0, blue: 39.0/255.0, alpha: 1)
     let customBlueLight = UIColor(red: 42.0/255.0, green: 47.0/255.0, blue: 55.0/255.0, alpha: 1)
@@ -27,7 +36,7 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Poppins-SemiBold", size: 20)
-        label.text = "Sadeepa Bandara"
+        label.text = "Sadeepa"
         label.textColor = .white
         return label
     }()
@@ -36,7 +45,7 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Poppins-Regular", size: 14)
-        label.text = "sadeepabandara@gmail.com"
+        label.text = "sadeepa@gmail.com"
         label.textColor = .white
         return label
     }()
@@ -77,7 +86,7 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Poppins-SemiBold", size: 20)
-        label.text = "74 Kg"
+        label.text = "102 Kg"
         label.textColor = .white
         label.textAlignment = .center
         return label
@@ -98,7 +107,7 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Poppins-SemiBold", size: 20)
-        label.text = "183 Cm"
+        label.text = "142 Cm"
         label.textColor = .white
         label.textAlignment = .center
         return label
@@ -417,12 +426,22 @@ class ProfileViewController: UIViewController {
     @objc func dismissPopup() {
         popupView.removeFromSuperview()
     }
+    
+    func handleAuthentication() {
+        if Auth.auth().currentUser == nil {
+            let vc = UINavigationController(rootViewController: ViewController())
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: false)
+        }
+    }
         
     @objc func goToLogin() {
-        let vc = LoginViewController()
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-        popupView.removeFromSuperview()
+        try? Auth.auth().signOut()
+        handleAuthentication()
+//        let vc = LoginViewController()
+//        vc.hidesBottomBarWhenPushed = true
+//        navigationController?.pushViewController(vc, animated: true)
+//        popupView.removeFromSuperview()
     }
     
     @objc func goToEdit() {
@@ -447,6 +466,20 @@ class ProfileViewController: UIViewController {
         nextBtn.addTarget(self, action: #selector(goToEdit), for: .touchUpInside)
         
         nextBtn4.addTarget(self, action: #selector(showPopup), for: .touchUpInside)
+    }
+    
+    var tabBarHeight: CGFloat = 0.0
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+            
+            if #available(iOS 11.0, *) {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -tabBarHeight).isActive = true
+            } else {
+                // Adjust the top anchor of the mainView to account for the tabBar height
+                profileImage.topAnchor.constraint(equalTo: view.topAnchor, constant: -tabBarHeight).isActive = true
+            }
     }
     
     func addComponents() {
@@ -489,6 +522,45 @@ class ProfileViewController: UIViewController {
         hStack5.addArrangedSubview(nextBtn4)
         mainView5.addSubview(hStack5)
         view.addSubview(mainView5)
+    }
+    
+    func getUserDataFirebase() {
+            
+        let data = UserDefaults.standard
+        
+        let email = data.string(forKey: "Email")
+            
+        let userRef = db.collection("user_details")
+        let query = userRef.whereField("email", isEqualTo: email as Any)
+
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                    return
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                print("No documents found")
+                return
+            }
+
+            if let userDocument = documents.first {
+                let name = userDocument.data()["email"] as? String ?? ""
+                let age = userDocument.data()["age"] as? String ?? ""
+                let weight = userDocument.data()["weight"] as? String ?? ""
+                let height = userDocument.data()["height"] as? String ?? ""
+                
+                self.name = name
+                self.age = age
+                self.weight = weight
+                self.height = height
+                    
+                self.userLabel.text = self.name
+                self.ageNumberLabel.text = self.age
+                self.weightNumberLabel.text = self.weight
+                self.heightNumberLabel.text = self.height
+            }
+        }
     }
     
     func setupConstraints() {
