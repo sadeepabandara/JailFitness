@@ -34,7 +34,7 @@ final class AuthenticationViewModel: ObservableObject {
         return emailPred.evaluate(with: email)
     }
     
-    func createUser() {
+    func registerUser() {
         guard let email = email,
               let password = password else { return }
         AuthManager.shared.registerUser(with: email, password: password)

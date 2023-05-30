@@ -279,7 +279,7 @@ class RegisterViewController: UIViewController {
         data.set(email, forKey: "Email")
         data.set(password, forKey: "Password")
         
-        viewModel.createUser()
+        viewModel.registerUser()
     }
     
     @objc func didTapToDismiss() {
